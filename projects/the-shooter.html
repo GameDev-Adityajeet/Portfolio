@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Shooter — Unity FPS Game by Adityajeet Yadav">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <title>The Shooter | Adityajeet Yadav</title>
+</head>
+
+<body>
+
+    <!-- TOP NAV -->
+    <nav class="proj-nav">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <span class="proj-nav-label">Project 2 of 4</span>
+        <div class="proj-nav-pages">
+            <a href="indra-vs-vritrasur.html">← Prev</a>
+            <a href="bubbleboom.html">Next →</a>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER -->
+    <header class="proj-hero">
+        <div class="proj-hero-bg" style="background: linear-gradient(135deg, #0f0f1a, #1a1a3e, #0f3460, #16213e);">
+        </div>
+        <div class="proj-hero-content">
+            <div class="proj-engine-tag">Unity · First-Person Shooter</div>
+            <h1 class="proj-hero-title">The Shooter</h1>
+            <p class="proj-hero-tagline">A polished, feature-rich first-person shooter built in Unity. Advanced player
+                movement, a modular multi-weapon system, decal-based impact effects, and refined enemy AI all come
+                together for a satisfying FPS experience.</p>
+            <div class="proj-hero-tags">
+                <span>Unity</span>
+                <span>C#</span>
+                <span>FPS</span>
+                <span>Animation System</span>
+                <span>Enemy AI</span>
+                <span>Decal FX</span>
+            </div>
+            <div class="proj-hero-actions">
+                <a href="#" class="btn primary" target="_blank">Play Demo</a>
+                <a href="#" class="btn secondary" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- OVERVIEW -->
+    <section class="proj-section proj-overview">
+        <h2 class="proj-section-title">Overview</h2>
+        <div class="proj-section-line"></div>
+        <p>The Shooter is a fully-featured, Unity-based first-person shooter developed between February and May 2025.
+            The project was an exercise in building a AAA-feel FPS experience from scratch — focusing on responsiveness,
+            visual feedback, and satisfying gameplay loops.</p>
+        <p>As the sole designer and developer, I built the entire weapon system from scratch using a modular
+            architecture that allows easy addition of new weapons. The character controller features advanced movement
+            mechanics including sprinting, crouching, and smooth camera bob.</p>
+        <p>The enemy AI was tuned across multiple playtests to ensure fair but challenging encounters, with clear
+            audio-visual feedback on each hit and kill.</p>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <section class="proj-section">
+        <h2 class="proj-section-title">Screenshots</h2>
+        <div class="proj-section-line"></div>
+        <!--
+            HOW TO ADD YOUR SCREENSHOTS:
+            1. Create folder: d:\Portfolio\assets\projects\shooter\
+            2. Add your images: ss1.jpg, ss2.jpg, ss3.jpg, ss4.jpg
+            3. Replace each <div class="gallery-placeholder"> with:
+               <img src="../assets/projects/shooter/ss1.jpg" alt="Screenshot 1">
+        -->
+        <div class="media-gallery">
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="ph-icon">📸</span>
+                    <p>Screenshot 1</p>
+                    <code>assets/projects/shooter/ss1.jpg</code>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="ph-icon">📸</span>
+                    <p>Screenshot 2</p>
+                    <code>assets/projects/shooter/ss2.jpg</code>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="ph-icon">📸</span>
+                    <p>Screenshot 3</p>
+                    <code>assets/projects/shooter/ss3.jpg</code>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="ph-icon">📸</span>
+                    <p>Screenshot 4</p>
+                    <code>assets/projects/shooter/ss4.jpg</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="proj-section">
+        <h2 class="proj-section-title">Gameplay Video</h2>
+        <div class="proj-section-line"></div>
+        <div class="video-container">
+            <!-- OPTION A: YouTube embed — replace YOUR_VIDEO_ID -->
+            <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe> -->
+
+            <!-- OPTION B: Local video file -->
+            <!-- <video controls><source src="../assets/projects/shooter/gameplay.mp4" type="video/mp4"></video> -->
+
+            <div class="video-placeholder">
+                <span class="ph-icon">🎬</span>
+                <p>Add your gameplay video here.<br>YouTube embed or local .mp4 file.</p>
+                <code>assets/projects/shooter/gameplay.mp4</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY FEATURES -->
+    <section class="proj-section">
+        <h2 class="proj-section-title">Key Features</h2>
+        <div class="proj-section-line"></div>
+        <ul class="feature-list">
+            <li>Modular multi-weapon system — each weapon has unique fire rate, damage, recoil, and reload animations
+            </li>
+            <li>Decal-based bullet impact FX on all surface types including wood, metal, and character bodies</li>
+            <li>Advanced character controller with sprint, crouch, smooth camera bob, and head-tilt on movement</li>
+            <li>Enemy AI with awareness states — idle patrol, alert tracking, and attack — tuned for balanced difficulty
+            </li>
+            <li>State-machine driven animation system for smooth transitions between weapon states and movement</li>
+            <li>Performance profiled and optimised to maintain a stable 60fps on mid-range hardware</li>
+        </ul>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="proj-section">
+        <h2 class="proj-section-title">Tech Stack</h2>
+        <div class="proj-section-line"></div>
+        <div class="tech-stack-grid">
+            <span class="tech-badge">Unity</span>
+            <span class="tech-badge">C#</span>
+            <span class="tech-badge">Animator Controller</span>
+            <span class="tech-badge">Unity Physics</span>
+            <span class="tech-badge">NavMesh AI</span>
+            <span class="tech-badge">Decal System</span>
+        </div>
+    </section>
+
+    <!-- FOOTER NAV -->
+    <div class="proj-page-footer">
+        <a href="indra-vs-vritrasur.html" class="proj-footer-link">
+            <span class="direction">← Previous Project</span>
+            <span class="proj-name">Indra vs Vritrasur</span>
+        </a>
+        <a href="../index.html" class="proj-footer-home">🏠 Portfolio Home</a>
+        <a href="bubbleboom.html" class="proj-footer-link" style="text-align:right">
+            <span class="direction">Next Project →</span>
+            <span class="proj-name">BubbleBoom</span>
+        </a>
+    </div>
+
+</body>
+
+</html>
