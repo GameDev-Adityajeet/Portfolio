@@ -43,6 +43,19 @@ body {
     line-height: 1.7;
 }
 
+/* Justify all multiline paragraph/description text */
+p,
+.bio,
+.about-text p,
+.tl-desc,
+.proj-desc,
+.contact-desc,
+.modal-body-wrap p,
+.modal-body-wrap li {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 /* Subtle grid bg texture */
 body::before {
     content: '';
