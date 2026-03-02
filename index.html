@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Game Developer Portfolio - Crafting Immersive Gaming Experiences">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Game Developer Portfolio</title>
+</head>
+
+<body>
+    <!-- 3D Hero Canvas (Three.js) -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">DEV<span class="dot">.</span>GAMES</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="badge-dot"></span>Available for Game Projects</div>
+            <h2 class="greeting">Hello World, I'm</h2>
+            <h1 class="name">Your Name</h1>
+            <div class="type-wrap">
+                <span class="type-prefix">I Make &nbsp;</span>
+                <span class="typewriter" id="typewriter"></span>
+            </div>
+            <p class="bio">
+                I design and develop immersive 3D games and interactive experiences. From AAA-inspired mechanics to
+                indie passion projects, I turn creative visions into playable realities.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn primary pulse">Play My Projects</a>
+                <a href="#contact" class="btn secondary">Hire Me</a>
+            </div>
+        </div>
+
+        <div class="hero-3d-model" id="hero-model-wrap">
+            <!-- The spinning 3D object from Three.js fills this area (absolute positioned canvas) -->
+            <div class="level-badge"><span class="level-num">99</span> LVL</div>
+        </div>
+
+        <div class="scroll-hint">
+            <span>Scroll Down</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section class="section about" id="about">
+        <div class="grid-lines"></div>
+        <div class="section-header">
+            <span class="section-prefix">// 01</span>
+            <h2 class="section-title">My Background</h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="about-layout">
+            <div class="about-card tilt-card">
+                <div class="about-card-inner">
+                    <div class="card-glow"></div>
+                    <div class="about-avatar">
+                        <div class="avatar-placeholder">Your Photo</div>
+                        <div class="avatar-ring"></div>
+                    </div>
+                    <div class="about-stats-mini">
+                        <div class="stat"><span class="stat-n">3+</span><span class="stat-l">Years</span></div>
+                        <div class="stat"><span class="stat-n">20+</span><span class="stat-l">Games</span></div>
+                        <div class="stat"><span class="stat-n">8+</span><span class="stat-l">Clients</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text">
+                <h3 class="about-sub">Game Developer & Interactive Experience Designer</h3>
+                <p>I'm a game developer who lives and breathes interactive experiences. Starting with modding classic
+                    games, I progressed to building full titles from scratch using modern engines and frameworks.</p>
+                <p>My passion lies in procedural generation, AI behaviour systems, and creating the kind of gameplay
+                    loops that make players lose track of time.</p>
+                <div class="xp-bar-wrap">
+                    <div class="xp-title">Experience Points</div>
+                    <div class="xp-bar">
+                        <div class="xp-fill" style="width: 78%">
+                            <span class="xp-tooltip">Level 8 Developer · 78 XP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section skills" id="skills">
+        <div class="section-header">
+            <span class="section-prefix">// 02</span>
+            <h2 class="section-title">Tech Stack</h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card tilt-card">
+                <div class="card-glow"></div>
+                <div class="skill-icon">🎮</div>
+                <h3>Game Engines</h3>
+                <div class="skill-tags">
+                    <span>Unity</span><span>Unreal Engine 5</span><span>Godot</span>
+                </div>
+            </div>
+            <div class="skill-card tilt-card">
+                <div class="card-glow"></div>
+                <div class="skill-icon">💻</div>
+                <h3>Programming</h3>
+                <div class="skill-tags">
+                    <span>C#</span><span>C++</span><span>Python</span><span>Blueprints</span>
+                </div>
+            </div>
+            <div class="skill-card tilt-card">
+                <div class="card-glow"></div>
+                <div class="skill-icon">🌐</div>
+                <h3>Web / 3D Web</h3>
+                <div class="skill-tags">
+                    <span>Three.js</span><span>WebGL</span><span>JavaScript</span>
+                </div>
+            </div>
+            <div class="skill-card tilt-card">
+                <div class="card-glow"></div>
+                <div class="skill-icon">🎨</div>
+                <h3>Art & Design</h3>
+                <div class="skill-tags">
+                    <span>Blender</span><span>Photoshop</span><span>Figma</span>
+                </div>
+            </div>
+            <div class="skill-card tilt-card">
+                <div class="card-glow"></div>
+                <div class="skill-icon">🤖</div>
+                <h3>Game AI</h3>
+                <div class="skill-tags">
+                    <span>Behaviour Trees</span><span>NavMesh</span><span>GOAP</span>
+                </div>
+            </div>
+            <div class="skill-card tilt-card">
+                <div class="card-glow"></div>
+                <div class="skill-icon">☁️</div>
+                <h3>Multiplayer</h3>
+                <div class="skill-tags">
+                    <span>Photon</span><span>Mirror</span><span>Steam SDK</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section projects" id="projects">
+        <div class="section-header">
+            <span class="section-prefix">// 03</span>
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="projects-grid">
+
+            <!-- PROJECT CARD 1 -->
+            <div class="project-card tilt-card" onclick="openModal('m1')">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-1">
+                    <div class="project-engine-badge">Unity</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">3D Action RPG</span>
+                    <h3 class="proj-title">Shadow Realm</h3>
+                    <p class="proj-desc">Open-world RPG with procedural dungeons, full combat system and branching
+                        storyline.</p>
+                    <div class="proj-tags"><span>C#</span><span>Unity</span><span>Shader Graph</span></div>
+                    <span class="proj-cta">Play Details →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT CARD 2 -->
+            <div class="project-card tilt-card" onclick="openModal('m2')">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-2">
+                    <div class="project-engine-badge">Unreal 5</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">Horror FPS</span>
+                    <h3 class="proj-title">Null Signal</h3>
+                    <p class="proj-desc">Atmospheric sci-fi horror shooter with dynamic AI and Lumen-powered lighting.
+                    </p>
+                    <div class="proj-tags"><span>C++</span><span>UE5</span><span>Lumen</span></div>
+                    <span class="proj-cta">Play Details →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT CARD 3 -->
+            <div class="project-card tilt-card" onclick="openModal('m3')">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-3">
+                    <div class="project-engine-badge">Three.js</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">Browser Game</span>
+                    <h3 class="proj-title">Hex Tactics</h3>
+                    <p class="proj-desc">Real-time browser strategy game using WebGL, running at 60fps on any device.
+                    </p>
+                    <div class="proj-tags"><span>Three.js</span><span>WebGL</span><span>JS</span></div>
+                    <span class="proj-cta">Play Details →</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section contact" id="contact">
+        <div class="section-header">
+            <span class="section-prefix">// 04</span>
+            <h2 class="section-title">Let's Build Together</h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="contact-wrap">
+            <div class="contact-card tilt-card">
+                <div class="card-glow"></div>
+                <p class="contact-desc">Looking for a passionate game developer to join your team or collaborate on a
+                    project? I'm currently available for freelance contracts and full-time roles.</p>
+                <a href="mailto:hello@yourdomain.com" class="btn primary pulse" id="contact-btn">Say Hello 👋</a>
+                <div class="contact-links">
+                    <a href="#" class="c-link" target="_blank">GitHub</a>
+                    <a href="#" class="c-link" target="_blank">LinkedIn</a>
+                    <a href="#" class="c-link" target="_blank">itch.io</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Your Name · Game Developer</p>
+    </footer>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <!-- MODAL 1 -->
+    <div class="modal" id="m1">
+        <button class="close-modal" onclick="closeModal('m1')">×</button>
+        <div class="modal-banner banner-1">
+            <div class="modal-banner-title">Shadow Realm</div>
+        </div>
+        <div class="modal-body-wrap">
+            <div class="modal-tags"><span>Unity</span><span>C#</span><span>Shader Graph</span><span>3D RPG</span></div>
+            <h3>Project Overview</h3>
+            <p>Shadow Realm is a fully-featured 3D action RPG built in Unity. The game features a procedural dungeon
+                system, a responsive combat system with combo chains, and a branching storyline with multiple endings.
+            </p>
+            <h3>Key Features</h3>
+            <ul>
+                <li>Procedural dungeon generation using Wave Function Collapse algorithm</li>
+                <li>Custom inverse kinematics for character animation</li>
+                <li>Fully optimized LOD system supporting 200+ NPCs simultaneously</li>
+                <li>Real-time day/night cycle with volumetric lighting</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="#" class="btn primary" target="_blank">Play Demo</a>
+                <a href="#" class="btn secondary" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2 -->
+    <div class="modal" id="m2">
+        <button class="close-modal" onclick="closeModal('m2')">×</button>
+        <div class="modal-banner banner-2">
+            <div class="modal-banner-title">Null Signal</div>
+        </div>
+        <div class="modal-body-wrap">
+            <div class="modal-tags"><span>Unreal Engine 5</span><span>C++</span><span>Lumen</span><span>FPS</span></div>
+            <h3>Project Overview</h3>
+            <p>Null Signal is an atmospheric sci-fi horror FPS built in Unreal Engine 5. It leverages Lumen global
+                illumination and Nanite geometry to create a photorealistic and terrifying experience.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li>Dynamic AI using Behaviour Trees and hierarchical state machines</li>
+                <li>Full Unreal 5 Lumen + Nanite pipeline</li>
+                <li>Volumetric fog and dynamic audio mix</li>
+                <li>Custom Chaos physics destruction system</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="#" class="btn primary" target="_blank">Play Demo</a>
+                <a href="#" class="btn secondary" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3 -->
+    <div class="modal" id="m3">
+        <button class="close-modal" onclick="closeModal('m3')">×</button>
+        <div class="modal-banner banner-3">
+            <div class="modal-banner-title">Hex Tactics</div>
+        </div>
+        <div class="modal-body-wrap">
+            <div class="modal-tags"><span>Three.js</span><span>WebGL</span><span>JavaScript</span><span>Strategy</span>
+            </div>
+            <h3>Project Overview</h3>
+            <p>Hex Tactics is a real-time browser-based strategy game. Built entirely with Three.js and WebGL for
+                buttery-smooth 60fps rendering without any native plugin.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li>Procedural hex grid map generation</li>
+                <li>Custom WebGL shader for hex cell selection and hover glow</li>
+                <li>Socket-based real-time multiplayer (up to 4 players)</li>
+                <li>Works on both desktop and mobile browsers</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="#" class="btn primary" target="_blank">Play Now</a>
+                <a href="#" class="btn secondary" target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- THREE.JS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
