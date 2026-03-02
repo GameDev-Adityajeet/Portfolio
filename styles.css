@@ -480,6 +480,29 @@ body::before {
     font-size: 1.05rem;
 }
 
+.about-text strong {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* AWARD CHIPS */
+.award-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: 1.5rem 0;
+}
+
+.award-chip {
+    padding: 0.5rem 1.1rem;
+    background: rgba(123, 47, 255, 0.1);
+    border: 1px solid rgba(123, 47, 255, 0.25);
+    border-radius: 50px;
+    font-size: 0.82rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
 /* XP BAR */
 .xp-bar-wrap {
     margin-top: 2rem;
@@ -521,6 +544,109 @@ body::before {
     padding: 3px 10px;
     border-radius: 20px;
     color: var(--accent);
+}
+
+/* ===========================
+   EXPERIENCE / TIMELINE
+   =========================== */
+.experience {
+    background: transparent;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 900px;
+}
+
+.timeline-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 0 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 2rem 2rem 0;
+    overflow: hidden;
+}
+
+.tl-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.2rem;
+    padding-left: 2rem;
+}
+
+.tl-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    box-shadow: 0 0 12px var(--glow-c);
+    flex-shrink: 0;
+}
+
+.tl-line {
+    flex: 1;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    margin-top: 0.5rem;
+}
+
+.tl-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent2);
+    margin-bottom: 0.4rem;
+}
+
+.tl-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.tl-company {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.tl-date {
+    display: inline-block;
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 400;
+}
+
+.tl-desc {
+    color: var(--muted);
+    font-size: 0.97rem;
+    margin: 1rem 0 1.2rem;
+    line-height: 1.7;
+}
+
+.tl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tl-tags span {
+    padding: 3px 12px;
+    background: rgba(0, 245, 255, 0.06);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.78rem;
+    color: var(--text-muted, var(--muted));
 }
 
 /* ===========================
@@ -614,6 +740,22 @@ body::before {
 
 .thumb-3 {
     background: linear-gradient(135deg, #0d0d0d, #1a0a2e, #16003b);
+}
+
+.thumb-1 {
+    background: linear-gradient(135deg, #1a0005, #370010, #5c001a);
+}
+
+.thumb-2 {
+    background: linear-gradient(135deg, #0f0f1a, #1a1a3e, #0f3460);
+}
+
+.thumb-3 {
+    background: linear-gradient(135deg, #001a0f, #003322, #005533);
+}
+
+.thumb-4 {
+    background: linear-gradient(135deg, #1a0a00, #331500, #552200);
 }
 
 .thumb-overlay {
@@ -815,15 +957,19 @@ body::before {
 }
 
 .banner-1 {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg, #1a0005, #370010, #5c001a);
 }
 
 .banner-2 {
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    background: linear-gradient(135deg, #0f0f1a, #1a1a3e, #0f3460);
 }
 
 .banner-3 {
-    background: linear-gradient(135deg, #0d0d0d, #1a0a2e, #16003b);
+    background: linear-gradient(135deg, #001a0f, #003322, #005533);
+}
+
+.banner-4 {
+    background: linear-gradient(135deg, #1a0a00, #331500, #552200);
 }
 
 .modal-banner-title {

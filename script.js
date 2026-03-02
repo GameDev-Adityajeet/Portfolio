@@ -72,12 +72,12 @@
     ];
 
     for (let i = 0; i < particleCount; i++) {
-        positions[i * 3]     = (Math.random() - 0.5) * 80;
+        positions[i * 3] = (Math.random() - 0.5) * 80;
         positions[i * 3 + 1] = (Math.random() - 0.5) * 60;
         positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
 
         const c = palette[Math.floor(Math.random() * palette.length)];
-        colors[i * 3]     = c.r;
+        colors[i * 3] = c.r;
         colors[i * 3 + 1] = c.g;
         colors[i * 3 + 2] = c.b;
     }
@@ -183,7 +183,7 @@
 
 // ─── TYPEWRITER EFFECT ────────────────────────────────────────────────────────
 (function () {
-    const words = ['3D Games', 'Immersive Worlds', 'Game AI', 'Multiplayer Experiences', 'Interactive Stories'];
+    const words = ['Unreal Engine RPGs', 'Unity FPS Games', 'Immersive 2D Worlds', 'Enemy AI Systems', 'Game Jam Projects'];
     const el = document.getElementById('typewriter');
     let wi = 0, ci = 0, deleting = false;
 
@@ -294,7 +294,7 @@ overlay.addEventListener('click', () => {
     `;
     document.head.appendChild(style);
 
-    document.querySelectorAll('.skill-card, .project-card, .about-card, .about-text, .contact-card').forEach((el, i) => {
+    document.querySelectorAll('.skill-card, .project-card, .about-card, .about-text, .contact-card, .timeline-item').forEach((el, i) => {
         el.classList.add('reveal');
         el.style.transitionDelay = (i % 4) * 80 + 'ms';
     });
