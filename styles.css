@@ -880,6 +880,27 @@ body::before {
     color: var(--accent3);
 }
 
+.contact-phones {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.phone-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+}
+
+.phone-link:hover {
+    color: var(--accent);
+}
+
 /* ===========================
    MODALS
    =========================== */
