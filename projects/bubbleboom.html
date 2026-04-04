@@ -124,6 +124,171 @@
             transform: scale(1.03);
             box-shadow: 0 0 30px rgba(0, 200, 100, 0.2);
         }
+
+        /* ── HERO TWO-COLUMN ── */
+        .proj-hero {
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .proj-hero-content {
+            flex: 0 0 auto;
+        }
+
+        /* ── FLOATING SCREENSHOT CARD ── */
+        .hero-deco {
+            position: relative;
+            z-index: 2;
+            flex: 0 0 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .deco-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .deco-blob-1 {
+            width: 260px;
+            height: 260px;
+            background: rgba(0, 220, 100, 0.18);
+            top: -30px;
+            right: -20px;
+            animation: blob-drift 6s ease-in-out infinite;
+        }
+
+        .deco-blob-2 {
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 160, 80, 0.14);
+            bottom: -20px;
+            left: -10px;
+            animation: blob-drift 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes blob-drift {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-18px); }
+        }
+
+        .deco-card {
+            position: relative;
+            width: 380px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 200, 100, 0.35);
+            box-shadow:
+                0 0 0 1px rgba(0, 180, 80, 0.12),
+                0 20px 60px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(0, 200, 80, 0.2);
+            transform: rotate(-3deg) translateY(0px);
+            animation: card-float 5s ease-in-out infinite;
+            transition: transform 0.4s, box-shadow 0.4s;
+            cursor: pointer;
+        }
+
+        .deco-card:hover {
+            transform: rotate(0deg) scale(1.04) translateY(-6px);
+            box-shadow:
+                0 0 0 1px rgba(0, 220, 100, 0.3),
+                0 30px 80px rgba(0, 0, 0, 0.8),
+                0 0 60px rgba(0, 220, 100, 0.4);
+            animation: none;
+        }
+
+        @keyframes card-float {
+            0%, 100% { transform: rotate(-3deg) translateY(0px); }
+            50%       { transform: rotate(-3deg) translateY(-10px); }
+        }
+
+        .deco-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .deco-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg,
+                transparent 40%,
+                rgba(255, 255, 255, 0.07) 50%,
+                transparent 60%);
+            background-size: 200% 100%;
+            background-position: -100% 0;
+            transition: background-position 0.6s;
+        }
+
+        .deco-card:hover::after {
+            background-position: 200% 0;
+        }
+
+        .deco-card-footer {
+            background: rgba(0, 15, 5, 0.9);
+            padding: 0.85rem 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(0, 200, 80, 0.18);
+        }
+
+        .dcf-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.5px;
+        }
+
+        .dcf-tag {
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(0, 220, 100, 0.7);
+        }
+
+        .deco-ribbon {
+            position: absolute;
+            top: 14px;
+            right: -2px;
+            background: linear-gradient(135deg, #00cc66, #009944);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 14px 4px 10px;
+            border-radius: 4px 0 0 4px;
+            box-shadow: 0 4px 12px rgba(0, 180, 80, 0.45);
+            z-index: 3;
+        }
+
+        .deco-sparkle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 220, 100, 0.8);
+            pointer-events: none;
+            animation: sparkle-blink 2.5s ease-in-out infinite;
+        }
+
+        .deco-sparkle:nth-child(1) { width: 6px; height: 6px; top: -14px; right: 60px; animation-delay: 0s; }
+        .deco-sparkle:nth-child(2) { width: 4px; height: 4px; bottom: 30px; left: -14px; animation-delay: 0.9s; }
+        .deco-sparkle:nth-child(3) { width: 5px; height: 5px; top: 50%; right: -16px; animation-delay: 1.7s; }
+
+        @keyframes sparkle-blink {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50%       { opacity: 0.1; transform: scale(0.4); }
+        }
+
+        @media (max-width: 900px) {
+            .hero-deco { display: none; }
+        }
     </style>
 </head>
 
@@ -162,6 +327,24 @@
                 <a href="#" class="btn secondary" target="_blank">GitHub</a>
             </div>
         </div>
+
+        <!-- FLOATING SCREENSHOT CARD -->
+        <div class="hero-deco">
+            <div class="deco-blob deco-blob-1"></div>
+            <div class="deco-blob deco-blob-2"></div>
+            <div class="deco-sparkle"></div>
+            <div class="deco-sparkle"></div>
+            <div class="deco-sparkle"></div>
+            <div class="deco-card" onclick="openLightbox(0)" title="Click to view screenshots">
+                <div class="deco-ribbon">🥉 GGJ 2025</div>
+                <img src="BubbleBoom/BB1.png" alt="BubbleBoom gameplay">
+                <div class="deco-card-footer">
+                    <span class="dcf-title">BubbleBoom</span>
+                    <span class="dcf-tag">Click to explore ↗</span>
+                </div>
+            </div>
+        </div>
+
     </header>
 
     <!-- OVERVIEW -->
