@@ -10,6 +10,121 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <title>BubbleBoom | Adityajeet Yadav</title>
+    <style>
+        /* ── LIGHTBOX ── */
+        .lb-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.93);
+            backdrop-filter: blur(10px);
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .lb-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lb-img-wrap {
+            position: relative;
+            max-width: 92vw;
+            max-height: 88vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lb-img-wrap img {
+            max-width: 92vw;
+            max-height: 88vh;
+            border-radius: 12px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            display: block;
+            object-fit: contain;
+            transform: scale(0.94);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lb-overlay.open .lb-img-wrap img {
+            transform: scale(1);
+        }
+
+        .lb-close {
+            position: fixed;
+            top: 22px;
+            right: 26px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 9001;
+        }
+
+        .lb-close:hover {
+            background: rgba(0, 200, 100, 0.35);
+        }
+
+        .lb-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 9001;
+        }
+
+        .lb-arrow:hover {
+            background: rgba(0, 200, 100, 0.25);
+        }
+
+        .lb-prev { left: 20px; }
+        .lb-next { right: 20px; }
+
+        .lb-counter {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            z-index: 9001;
+        }
+
+        .gallery-item img {
+            cursor: zoom-in;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(0, 200, 100, 0.2);
+        }
+    </style>
 </head>
 
 <body>
@@ -26,8 +141,7 @@
 
     <!-- HERO BANNER -->
     <header class="proj-hero">
-        <div class="proj-hero-bg" style="background: linear-gradient(135deg, #001a0f, #003322, #005533, #002b1a);">
-        </div>
+        <div class="proj-hero-bg" style="background: linear-gradient(135deg, #001a0f, #003322, #005533, #002b1a);"></div>
         <div class="proj-hero-content">
             <div class="proj-award-badge">🥉 Global Game Jam 2025 — 3rd Prize</div>
             <div class="proj-engine-tag">Unity · 2D Arcade · Built in 48 Hours</div>
@@ -68,41 +182,15 @@
     <section class="proj-section">
         <h2 class="proj-section-title">Screenshots</h2>
         <div class="proj-section-line"></div>
-        <!--
-            HOW TO ADD YOUR SCREENSHOTS:
-            1. Create folder: d:\Portfolio\assets\projects\bubbleboom\
-            2. Add your images: ss1.jpg, ss2.jpg, ss3.jpg, ss4.jpg
-            3. Replace each <div class="gallery-placeholder"> with:
-               <img src="../assets/projects/bubbleboom/ss1.jpg" alt="Screenshot 1">
-        -->
         <div class="media-gallery">
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 1</p>
-                    <code>assets/projects/bubbleboom/ss1.jpg</code>
-                </div>
+                <img src="BubbleBoom/BB1.png" alt="BubbleBoom Screenshot 1" onclick="openLightbox(0)">
             </div>
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 2</p>
-                    <code>assets/projects/bubbleboom/ss2.jpg</code>
-                </div>
+                <img src="BubbleBoom/BB2.png" alt="BubbleBoom Screenshot 2" onclick="openLightbox(1)">
             </div>
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 3</p>
-                    <code>assets/projects/bubbleboom/ss3.jpg</code>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 4</p>
-                    <code>assets/projects/bubbleboom/ss4.jpg</code>
-                </div>
+                <img src="BubbleBoom/BB3.png" alt="BubbleBoom Screenshot 3" onclick="openLightbox(2)">
             </div>
         </div>
     </section>
@@ -111,21 +199,17 @@
     <section class="proj-section">
         <h2 class="proj-section-title">Gameplay Video</h2>
         <div class="proj-section-line"></div>
-        <div class="video-container">
-            <!-- OPTION A: YouTube embed — replace YOUR_VIDEO_ID -->
-            <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe> -->
-
-            <!-- OPTION B: Local video file -->
-            <!-- <video controls><source src="../assets/projects/bubbleboom/gameplay.mp4" type="video/mp4"></video> -->
-
-            <div class="video-placeholder">
-                <span class="ph-icon">🎬</span>
-                <p>Add your gameplay video here.<br>YouTube embed or local .mp4 file.</p>
-                <code>assets/projects/bubbleboom/gameplay.mp4</code>
-            </div>
+        <div style="width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;">
+            <iframe
+                src="https://www.youtube.com/embed/hiuWEXhRhcc"
+                title="BubbleBoom — Gameplay Video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                style="width:100%;height:100%;border:none;display:block;">
+            </iframe>
         </div>
     </section>
-
 
     <!-- FOOTER NAV -->
     <div class="proj-page-footer">
@@ -139,6 +223,63 @@
             <span class="proj-name">Reality Run</span>
         </a>
     </div>
+
+    <!-- LIGHTBOX OVERLAY -->
+    <div class="lb-overlay" id="lb-overlay" onclick="handleLbClick(event)">
+        <button class="lb-close" onclick="closeLightbox()" title="Close">✕</button>
+        <button class="lb-arrow lb-prev" onclick="lbNav(-1, event)" title="Previous">‹</button>
+        <div class="lb-img-wrap">
+            <img id="lb-img" src="" alt="">
+        </div>
+        <button class="lb-arrow lb-next" onclick="lbNav(1, event)" title="Next">›</button>
+        <div class="lb-counter" id="lb-counter"></div>
+    </div>
+
+    <script>
+        const lbImages = [
+            'BubbleBoom/BB1.png',
+            'BubbleBoom/BB2.png',
+            'BubbleBoom/BB3.png'
+        ];
+        let lbCurrent = 0;
+
+        function openLightbox(index) {
+            lbCurrent = index;
+            updateLb();
+            document.getElementById('lb-overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lb-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function lbNav(dir, e) {
+            if (e) e.stopPropagation();
+            lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
+            updateLb();
+        }
+
+        function updateLb() {
+            const img = document.getElementById('lb-img');
+            img.src = lbImages[lbCurrent];
+            img.alt = 'BubbleBoom Screenshot ' + (lbCurrent + 1);
+            document.getElementById('lb-counter').textContent = (lbCurrent + 1) + ' / ' + lbImages.length;
+        }
+
+        function handleLbClick(e) {
+            if (e.target === document.getElementById('lb-overlay')) closeLightbox();
+        }
+
+        document.addEventListener('keydown', function (e) {
+            const lb = document.getElementById('lb-overlay');
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lbNav(-1);
+            if (e.key === 'ArrowRight') lbNav(1);
+        });
+    </script>
 
 </body>
 
