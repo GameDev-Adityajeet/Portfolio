@@ -76,7 +76,22 @@
             <div class="about-card tilt-card">
                 <div class="card-glow"></div>
                 <div class="about-card-inner">
-                    <div class="avatar-placeholder">Your Photo Here</div>
+                    <img src="assets/profile.jpg" alt="Adityajeet Yadav"
+                        style="
+                            width: 160px;
+                            height: 160px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            object-position: center top;
+                            display: block;
+                            margin: 0 auto 1rem;
+                            border: 3px solid rgba(139, 92, 246, 0.5);
+                            box-shadow: 0 0 0 6px rgba(139, 92, 246, 0.1), 0 8px 32px rgba(0,0,0,0.5);
+                            transition: transform 0.3s, box-shadow 0.3s;
+                        "
+                        onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 0 0 6px rgba(139,92,246,0.25), 0 16px 48px rgba(0,0,0,0.6)';"
+                        onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 0 0 6px rgba(139,92,246,0.1), 0 8px 32px rgba(0,0,0,0.5)';"
+                    >
                     <div class="about-stats-mini">
                         <div class="stat"><span class="stat-n">2+</span><span class="stat-l">Years</span></div>
                         <div class="stat"><span class="stat-n">4+</span><span class="stat-l">Games</span></div>
@@ -237,6 +252,8 @@
             <div class="project-card tilt-card" onclick="window.location.href='projects/indra-vs-vritrasur.html'">
                 <div class="card-glow"></div>
                 <div class="project-thumb thumb-1">
+                    <img src="projects/Legend of Indra vs Vritrasur/Indra1.png" alt="Legend of Indra vs Vritrasur preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
                     <div class="project-engine-badge">Unreal Engine 5</div>
                     <div class="thumb-overlay"></div>
                 </div>
