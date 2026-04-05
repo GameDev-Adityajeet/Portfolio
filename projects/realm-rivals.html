@@ -324,7 +324,9 @@
                 <span>Level Design</span>
             </div>
             <div class="proj-hero-actions">
-                <a href="#" class="btn primary" target="_blank">⬇ Download Game</a>
+                <a href="https://drive.google.com/file/d/1J4SWFTBHTls6U0nyFR9s3BXf5Cxs-OVW/view?usp=sharing" class="btn primary" target="_blank">⬇ Download Game</a>
+                <a href="https://shubham-bajaj.itch.io/realm-rivals" class="btn secondary" target="_blank">Itch.io</a>
+                <a href="https://github.com/ReZ26/BP_Multiplayer" class="btn secondary" target="_blank">GitHub</a>
             </div>
         </div>
 
@@ -335,12 +337,12 @@
             <div class="deco-sparkle"></div>
             <div class="deco-sparkle"></div>
             <div class="deco-sparkle"></div>
-            <div class="deco-card" title="Screenshots coming soon">
+            <div class="deco-card" onclick="openLightbox(0)" title="Click to view screenshots">
                 <div class="deco-ribbon">⚔️ Multiplayer</div>
-                <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a0a1a,#3d1860);display:flex;align-items:center;justify-content:center;color:rgba(180,100,255,0.5);font-size:0.9rem;letter-spacing:2px;">SCREENSHOT</div>
+                <img src="Realm%20Rivals/Screenshot%202026-04-05%20165636.png" alt="Realm Rivals gameplay">
                 <div class="deco-card-footer">
                     <span class="dcf-title">Realm Rivals</span>
-                    <span class="dcf-tag">Arena Combat</span>
+                    <span class="dcf-tag">Click to explore ↗</span>
                 </div>
             </div>
         </div>
@@ -367,11 +369,39 @@
         <div class="proj-section-line"></div>
         <div class="media-gallery">
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshots coming soon</p>
-                </div>
+                <img src="Realm%20Rivals/Screenshot%202026-04-05%20165615.png" alt="Realm Rivals Screenshot 1" onclick="openLightbox(0)">
             </div>
+            <div class="gallery-item">
+                <img src="Realm%20Rivals/Screenshot%202026-04-05%20165636.png" alt="Realm Rivals Screenshot 2" onclick="openLightbox(1)">
+            </div>
+            <div class="gallery-item">
+                <img src="Realm%20Rivals/Screenshot%202026-04-05%20165649.png" alt="Realm Rivals Screenshot 3" onclick="openLightbox(2)">
+            </div>
+            <div class="gallery-item">
+                <img src="Realm%20Rivals/Screenshot%202026-04-05%20165827.png" alt="Realm Rivals Screenshot 4" onclick="openLightbox(3)">
+            </div>
+            <div class="gallery-item">
+                <img src="Realm%20Rivals/Screenshot%202026-04-05%20165843.png" alt="Realm Rivals Screenshot 5" onclick="openLightbox(4)">
+            </div>
+            <div class="gallery-item">
+                <img src="Realm%20Rivals/Screenshot%202026-04-05%20165913.png" alt="Realm Rivals Screenshot 6" onclick="openLightbox(5)">
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="proj-section">
+        <h2 class="proj-section-title">Gameplay Video</h2>
+        <div class="proj-section-line"></div>
+        <div style="width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;">
+            <iframe
+                src="https://www.youtube.com/embed/Pl3C-Bl0fmI"
+                title="Realm Rivals — Gameplay Video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                style="width:100%;height:100%;border:none;display:block;">
+            </iframe>
         </div>
     </section>
 
@@ -400,11 +430,17 @@
     </div>
 
     <script>
-        const lbImages = [];
+        const lbImages = [
+            "Realm%20Rivals/Screenshot%202026-04-05%20165615.png",
+            "Realm%20Rivals/Screenshot%202026-04-05%20165636.png",
+            "Realm%20Rivals/Screenshot%202026-04-05%20165649.png",
+            "Realm%20Rivals/Screenshot%202026-04-05%20165827.png",
+            "Realm%20Rivals/Screenshot%202026-04-05%20165843.png",
+            "Realm%20Rivals/Screenshot%202026-04-05%20165913.png"
+        ];
         let lbCurrent = 0;
 
         function openLightbox(index) {
-            if (lbImages.length === 0) return;
             lbCurrent = index;
             updateLb();
             document.getElementById('lb-overlay').classList.add('open');
@@ -418,7 +454,6 @@
 
         function lbNav(dir, e) {
             if (e) e.stopPropagation();
-            if (lbImages.length === 0) return;
             lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
             updateLb();
         }
