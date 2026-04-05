@@ -10,6 +10,269 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <title>The Shooter | Adityajeet Yadav</title>
+    <style>
+        /* ── LIGHTBOX ── */
+        .lb-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.93);
+            backdrop-filter: blur(10px);
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .lb-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lb-img-wrap {
+            position: relative;
+            max-width: 92vw;
+            max-height: 88vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lb-img-wrap img {
+            max-width: 92vw;
+            max-height: 88vh;
+            border-radius: 12px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            display: block;
+            object-fit: contain;
+            transform: scale(0.94);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lb-overlay.open .lb-img-wrap img {
+            transform: scale(1);
+        }
+
+        .lb-close {
+            position: fixed;
+            top: 22px;
+            right: 26px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 9001;
+        }
+
+        .lb-close:hover {
+            background: rgba(96, 165, 250, 0.35);
+        }
+
+        .lb-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 9001;
+        }
+
+        .lb-arrow:hover {
+            background: rgba(96, 165, 250, 0.25);
+        }
+
+        .lb-prev { left: 20px; }
+        .lb-next { right: 20px; }
+
+        .lb-counter {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            z-index: 9001;
+        }
+
+        .gallery-item img {
+            cursor: zoom-in;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.25);
+        }
+
+        /* ── FLOATING SCREENSHOT CARD ── */
+        .proj-hero {
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .proj-hero-content {
+            flex: 0 0 auto;
+        }
+
+        .hero-deco {
+            position: relative;
+            z-index: 2;
+            flex: 0 0 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .deco-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .deco-blob-1 {
+            width: 260px;
+            height: 260px;
+            background: rgba(96, 165, 250, 0.18);
+            top: -30px;
+            right: -20px;
+            animation: blob-drift 6s ease-in-out infinite;
+        }
+
+        .deco-blob-2 {
+            width: 200px;
+            height: 200px;
+            background: rgba(59, 130, 246, 0.14);
+            bottom: -20px;
+            left: -10px;
+            animation: blob-drift 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes blob-drift {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-18px); }
+        }
+
+        .deco-card {
+            position: relative;
+            width: 380px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            box-shadow:
+                0 0 0 1px rgba(59, 130, 246, 0.12),
+                0 20px 60px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(96, 165, 250, 0.2);
+            transform: rotate(-3deg) translateY(0px);
+            animation: card-float 5s ease-in-out infinite;
+            transition: transform 0.4s, box-shadow 0.4s;
+            cursor: pointer;
+        }
+
+        .deco-card:hover {
+            transform: rotate(0deg) scale(1.04) translateY(-6px);
+            box-shadow:
+                0 0 0 1px rgba(96, 165, 250, 0.3),
+                0 30px 80px rgba(0, 0, 0, 0.8),
+                0 0 60px rgba(96, 165, 250, 0.4);
+            animation: none;
+        }
+
+        @keyframes card-float {
+            0%, 100% { transform: rotate(-3deg) translateY(0px); }
+            50%       { transform: rotate(-3deg) translateY(-10px); }
+        }
+
+        .deco-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .deco-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg,
+                transparent 40%,
+                rgba(255, 255, 255, 0.07) 50%,
+                transparent 60%);
+            background-size: 200% 100%;
+            background-position: -100% 0;
+            transition: background-position 0.6s;
+        }
+
+        .deco-card:hover::after {
+            background-position: 200% 0;
+        }
+
+        .deco-card-footer {
+            background: rgba(5, 10, 20, 0.9);
+            padding: 0.85rem 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(96, 165, 250, 0.18);
+        }
+
+        .dcf-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.5px;
+        }
+
+        .dcf-tag {
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(96, 165, 250, 0.7);
+        }
+
+        .deco-sparkle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(96, 165, 250, 0.8);
+            pointer-events: none;
+            animation: sparkle-blink 2.5s ease-in-out infinite;
+        }
+
+        .deco-sparkle:nth-child(1) { width: 6px; height: 6px; top: -14px; right: 60px; animation-delay: 0s; }
+        .deco-sparkle:nth-child(2) { width: 4px; height: 4px; bottom: 30px; left: -14px; animation-delay: 0.9s; }
+        .deco-sparkle:nth-child(3) { width: 5px; height: 5px; top: 50%; right: -16px; animation-delay: 1.7s; }
+
+        @keyframes sparkle-blink {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50%       { opacity: 0.1; transform: scale(0.4); }
+        }
+
+        @media (max-width: 900px) {
+            .hero-deco { display: none; }
+        }
+    </style>
 </head>
 
 <body>
@@ -43,10 +306,28 @@
                 <span>Decal FX</span>
             </div>
             <div class="proj-hero-actions">
-                <a href="#" class="btn primary" target="_blank">Play Demo</a>
-                <a href="#" class="btn secondary" target="_blank">GitHub</a>
+                <a href="https://drive.google.com/file/d/1aRDthoK3e5qqw7fl-U2JWYedlKcE1XnG/view?usp=sharing" class="btn primary" target="_blank">⬇ Download Game</a>
+                <a href="https://gamedev-adityajeet.itch.io/the-shooter" class="btn secondary" target="_blank">Play on itch.io</a>
+                <a href="https://github.com/GameDev-Adityajeet/The-Shooter" class="btn secondary" target="_blank">GitHub</a>
             </div>
         </div>
+
+        <!-- FLOATING SCREENSHOT CARD -->
+        <div class="hero-deco">
+            <div class="deco-blob deco-blob-1"></div>
+            <div class="deco-blob deco-blob-2"></div>
+            <div class="deco-sparkle"></div>
+            <div class="deco-sparkle"></div>
+            <div class="deco-sparkle"></div>
+            <div class="deco-card" onclick="openLightbox(0)" title="Click to view screenshots">
+                <img src="The Shooter/Screenshot 2026-04-05 103116.png" alt="The Shooter gameplay">
+                <div class="deco-card-footer">
+                    <span class="dcf-title">The Shooter</span>
+                    <span class="dcf-tag">Click to explore ↗</span>
+                </div>
+            </div>
+        </div>
+
     </header>
 
     <!-- OVERVIEW -->
@@ -67,41 +348,18 @@
     <section class="proj-section">
         <h2 class="proj-section-title">Screenshots</h2>
         <div class="proj-section-line"></div>
-        <!--
-            HOW TO ADD YOUR SCREENSHOTS:
-            1. Create folder: d:\Portfolio\assets\projects\shooter\
-            2. Add your images: ss1.jpg, ss2.jpg, ss3.jpg, ss4.jpg
-            3. Replace each <div class="gallery-placeholder"> with:
-               <img src="../assets/projects/shooter/ss1.jpg" alt="Screenshot 1">
-        -->
         <div class="media-gallery">
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 1</p>
-                    <code>assets/projects/shooter/ss1.jpg</code>
-                </div>
+                <img src="The Shooter/Screenshot 2026-04-05 103116.png" alt="The Shooter Screenshot 1" onclick="openLightbox(0)">
             </div>
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 2</p>
-                    <code>assets/projects/shooter/ss2.jpg</code>
-                </div>
+                <img src="The Shooter/Screenshot 2026-04-05 103657.png" alt="The Shooter Screenshot 2" onclick="openLightbox(1)">
             </div>
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 3</p>
-                    <code>assets/projects/shooter/ss3.jpg</code>
-                </div>
+                <img src="The Shooter/Screenshot 2026-04-05 103715.png" alt="The Shooter Screenshot 3" onclick="openLightbox(2)">
             </div>
             <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <span class="ph-icon">📸</span>
-                    <p>Screenshot 4</p>
-                    <code>assets/projects/shooter/ss4.jpg</code>
-                </div>
+                <img src="The Shooter/Screenshot 2026-04-05 103749.png" alt="The Shooter Screenshot 4" onclick="openLightbox(3)">
             </div>
         </div>
     </section>
@@ -110,21 +368,17 @@
     <section class="proj-section">
         <h2 class="proj-section-title">Gameplay Video</h2>
         <div class="proj-section-line"></div>
-        <div class="video-container">
-            <!-- OPTION A: YouTube embed — replace YOUR_VIDEO_ID -->
-            <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe> -->
-
-            <!-- OPTION B: Local video file -->
-            <!-- <video controls><source src="../assets/projects/shooter/gameplay.mp4" type="video/mp4"></video> -->
-
-            <div class="video-placeholder">
-                <span class="ph-icon">🎬</span>
-                <p>Add your gameplay video here.<br>YouTube embed or local .mp4 file.</p>
-                <code>assets/projects/shooter/gameplay.mp4</code>
-            </div>
+        <div style="width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;">
+            <iframe
+                src="https://www.youtube.com/embed/PSinm3cUhLY"
+                title="The Shooter — Gameplay Video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                style="width:100%;height:100%;border:none;display:block;">
+            </iframe>
         </div>
     </section>
-
 
     <!-- FOOTER NAV -->
     <div class="proj-page-footer">
@@ -138,6 +392,64 @@
             <span class="proj-name">BubbleBoom</span>
         </a>
     </div>
+
+    <!-- LIGHTBOX OVERLAY -->
+    <div class="lb-overlay" id="lb-overlay" onclick="handleLbClick(event)">
+        <button class="lb-close" onclick="closeLightbox()" title="Close">✕</button>
+        <button class="lb-arrow lb-prev" onclick="lbNav(-1, event)" title="Previous">‹</button>
+        <div class="lb-img-wrap">
+            <img id="lb-img" src="" alt="">
+        </div>
+        <button class="lb-arrow lb-next" onclick="lbNav(1, event)" title="Next">›</button>
+        <div class="lb-counter" id="lb-counter"></div>
+    </div>
+
+    <script>
+        const lbImages = [
+            'The Shooter/Screenshot 2026-04-05 103116.png',
+            'The Shooter/Screenshot 2026-04-05 103657.png',
+            'The Shooter/Screenshot 2026-04-05 103715.png',
+            'The Shooter/Screenshot 2026-04-05 103749.png'
+        ];
+        let lbCurrent = 0;
+
+        function openLightbox(index) {
+            lbCurrent = index;
+            updateLb();
+            document.getElementById('lb-overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lb-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function lbNav(dir, e) {
+            if (e) e.stopPropagation();
+            lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
+            updateLb();
+        }
+
+        function updateLb() {
+            const img = document.getElementById('lb-img');
+            img.src = lbImages[lbCurrent];
+            img.alt = 'The Shooter Screenshot ' + (lbCurrent + 1);
+            document.getElementById('lb-counter').textContent = (lbCurrent + 1) + ' / ' + lbImages.length;
+        }
+
+        function handleLbClick(e) {
+            if (e.target === document.getElementById('lb-overlay')) closeLightbox();
+        }
+
+        document.addEventListener('keydown', function (e) {
+            const lb = document.getElementById('lb-overlay');
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lbNav(-1);
+            if (e.key === 'ArrowRight') lbNav(1);
+        });
+    </script>
 
 </body>
 
