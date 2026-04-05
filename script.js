@@ -306,15 +306,3 @@ overlay.addEventListener('click', () => {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
 
-// ─── DYNAMIC CONTACT BUTTON ──────────────────────────────────────────────────
-(function () {
-    // Check if the user is on a mobile device
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    const contactBtn = document.getElementById('contact-btn');
-    if (contactBtn && !isMobile) {
-        // If on Desktop, revert to the Google Mail compose link for a seamless web experience
-        contactBtn.href = "https://mail.google.com/mail/?view=cm&fs=1&to=gamedeveloper.adityajeet@gmail.com&su=Hey%20Adityajeet%20-%20Let%27s%20Connect!";
-        contactBtn.target = "_blank";
-    }
-})();
