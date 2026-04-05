@@ -183,7 +183,7 @@
 
 // ─── TYPEWRITER EFFECT ────────────────────────────────────────────────────────
 (function () {
-    const words = ['Unreal Engine RPGs', 'Unity FPS Games', 'Immersive 2D Worlds', 'Enemy AI Systems', 'Game Jam Projects'];
+    const words = ['Unreal Engine RPGs', 'Unity FPS Games', 'AI Behavior & Combat Logic', 'Enemy AI Systems', 'Narrative-Driven Worlds'];
     const el = document.getElementById('typewriter');
     let wi = 0, ci = 0, deleting = false;
 
