@@ -771,6 +771,22 @@ body::before {
     background: linear-gradient(135deg, #1a0a00, #331500, #552200);
 }
 
+.thumb-5 {
+    background: linear-gradient(135deg, #1a1000, #332800, #554400);
+}
+
+.thumb-6 {
+    background: linear-gradient(135deg, #0a1a0d, #0e3318, #145528);
+}
+
+.thumb-7 {
+    background: linear-gradient(135deg, #1a0a1a, #2a1040, #3d1860);
+}
+
+.thumb-8 {
+    background: linear-gradient(135deg, #1a0020, #3a0050, #6a0080);
+}
+
 .thumb-overlay {
     position: absolute;
     inset: 0;
@@ -1004,6 +1020,22 @@ body::before {
 
 .banner-4 {
     background: linear-gradient(135deg, #1a0a00, #331500, #552200);
+}
+
+.banner-5 {
+    background: linear-gradient(135deg, #1a1000, #332800, #554400);
+}
+
+.banner-6 {
+    background: linear-gradient(135deg, #0a1a0d, #0e3318, #145528);
+}
+
+.banner-7 {
+    background: linear-gradient(135deg, #1a0a1a, #2a1040, #3d1860);
+}
+
+.banner-8 {
+    background: linear-gradient(135deg, #1a0020, #3a0050, #6a0080);
 }
 
 .modal-banner-title {
