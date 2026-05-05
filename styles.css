@@ -2,22 +2,19 @@
    DESIGN TOKENS
    =========================== */
 :root {
-    --bg: #060a10;
-    --bg-2: #0d1220;
-    --card-bg: rgba(13, 18, 32, 0.85);
-    --text: #eef2ff;
-    --muted: #7c8ba1;
-    --accent: #00f5ff;
-    /* neon cyan */
-    --accent2: #7b2fff;
-    /* neon purple */
-    --accent3: #ff3cac;
-    /* neon pink */
-    --glass: rgba(255, 255, 255, 0.04);
-    --border: rgba(0, 245, 255, 0.12);
-    --border2: rgba(123, 47, 255, 0.18);
-    --glow-c: rgba(0, 245, 255, 0.35);
-    --glow-p: rgba(123, 47, 255, 0.35);
+    --bg: #0f172a;
+    --bg-2: #1e293b;
+    --card-bg: rgba(30, 41, 59, 0.85);
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent2: #818cf8;
+    --accent3: #f472b6;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(56, 189, 248, 0.15);
+    --border2: rgba(129, 140, 248, 0.2);
+    --glow-c: rgba(56, 189, 248, 0.3);
+    --glow-p: rgba(129, 140, 248, 0.3);
 }
 
 /* ===========================
@@ -62,8 +59,8 @@ body::before {
     position: fixed;
     inset: 0;
     background-image:
-        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
     z-index: 0;
@@ -93,7 +90,7 @@ body::before {
     justify-content: space-between;
     align-items: center;
     padding: 1.2rem 8%;
-    background: rgba(6, 10, 16, 0.7);
+    background: rgba(15, 23, 42, 0.75);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
     transition: background 0.3s;
@@ -266,7 +263,7 @@ body::before {
 
 .btn.primary {
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #000;
+    color: #0f172a;
     box-shadow: 0 0 22px var(--glow-c);
 }
 
@@ -957,7 +954,7 @@ body::before {
     width: 90%;
     max-width: 800px;
     max-height: 90vh;
-    background: #0d1220;
+    background: #1e293b;
     border: 1px solid var(--border2);
     border-radius: 24px;
     z-index: 2001;

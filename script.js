@@ -16,28 +16,30 @@
     camera.position.set(0, 0, 22);
 
     // ─── LIGHTS ─────
-    const ambientLight = new THREE.AmbientLight(0x00f5ff, 0.25);
+    const ambientLight = new THREE.AmbientLight(0x38bdf8, 0.25);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x00f5ff, 3.0, 60);
+    const pointLight1 = new THREE.PointLight(0x38bdf8, 3.0, 60);
     pointLight1.position.set(10, 15, 10);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0x7b2fff, 2.5, 60);
+    const pointLight2 = new THREE.PointLight(0x818cf8, 2.5, 60);
     pointLight2.position.set(-12, -8, 5);
     scene.add(pointLight2);
 
-    const pointLight3 = new THREE.PointLight(0xff3cac, 2.0, 40);
+    const pointLight3 = new THREE.PointLight(0xf472b6, 2.0, 40);
     pointLight3.position.set(0, -14, 8);
     scene.add(pointLight3);
 
     // ─── HERO 3D OBJECT: Glowing Icosahedron ─────
     const heroGeo = new THREE.IcosahedronGeometry(4.2, 1);
     const heroMat = new THREE.MeshStandardMaterial({
-        color: 0x0d1220,
-        metalness: 0.9,
-        roughness: 0.1,
+        color: 0x1e293b,
+        metalness: 0.6,
+        roughness: 0.2,
         wireframe: false,
+        transparent: true,
+        opacity: 0.85
     });
     const heroCrystal = new THREE.Mesh(heroGeo, heroMat);
     heroCrystal.position.set(7, 0, 0);
@@ -45,7 +47,7 @@
 
     // Wireframe overlay on hero crystal
     const wireMat = new THREE.MeshBasicMaterial({
-        color: 0x00f5ff, wireframe: true, transparent: true, opacity: 0.25
+        color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.25
     });
     const wireOverlay = new THREE.Mesh(heroGeo, wireMat);
     wireOverlay.position.set(7, 0, 0);
@@ -54,7 +56,7 @@
     // Inner glowing core
     const coreGeo = new THREE.IcosahedronGeometry(2.4, 0);
     const coreMat = new THREE.MeshStandardMaterial({
-        color: 0x00f5ff, emissive: 0x00f5ff, emissiveIntensity: 1.5,
+        color: 0x7dd3fc, emissive: 0x7dd3fc, emissiveIntensity: 1.5,
         transparent: true, opacity: 0.5, wireframe: false,
     });
     const coreMesh = new THREE.Mesh(coreGeo, coreMat);
@@ -66,9 +68,9 @@
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     const palette = [
-        new THREE.Color(0x00f5ff),
-        new THREE.Color(0x7b2fff),
-        new THREE.Color(0xff3cac),
+        new THREE.Color(0x38bdf8),
+        new THREE.Color(0x818cf8),
+        new THREE.Color(0xf472b6),
     ];
 
     for (let i = 0; i < particleCount; i++) {
@@ -100,7 +102,7 @@
         new THREE.BoxGeometry(0.7, 0.7, 0.7),
         new THREE.IcosahedronGeometry(0.45, 0),
     ];
-    const miniColors = [0x00f5ff, 0x7b2fff, 0xff3cac, 0x00f5ff];
+    const miniColors = [0x38bdf8, 0x818cf8, 0xf472b6, 0x38bdf8];
 
     for (let i = 0; i < 14; i++) {
         const geo = miniGeos[i % miniGeos.length];
@@ -238,7 +240,7 @@
     window.addEventListener('scroll', () => {
         // Darken navbar on scroll
         navbar.style.background = window.scrollY > 60
-            ? 'rgba(6,10,16,0.95)' : 'rgba(6,10,16,0.7)';
+            ? 'rgba(15, 23, 42, 0.95)' : 'rgba(15, 23, 42, 0.75)';
 
         // Highlight active nav section
         let current = 'home';
