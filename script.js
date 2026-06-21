@@ -77,106 +77,105 @@
     pointLight3.position.set(0, -14, 8);
     scene.add(pointLight3);
 
-    // ─── HERO 3D OBJECT: Holographic Gamepad (game-themed) ─────
+    // ─── HERO 3D OBJECTS: Floating Gaming Symbols (PlayStation-style) ─────
     const hasHero = !!document.querySelector('.hero');
-    const gamepadGroup = new THREE.Group();
+    const gemFieldGroup = new THREE.Group();
+    const gems = []; // stores our floating gaming elements
 
     if (hasHero) {
-        // Controller main body
-        const bodyGeo = new THREE.BoxGeometry(4.6, 2.8, 1.2);
-        const bodyMat = new THREE.MeshStandardMaterial({
-            color: 0x050508, metalness: 0.8, roughness: 0.2, transparent: true, opacity: 0.7
+        // Setup materials with subtle glow/wireframe
+        const cyanMat = new THREE.MeshBasicMaterial({
+            color: 0x00f0ff,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.3
         });
-        const bodyMesh = new THREE.Mesh(bodyGeo, bodyMat);
-        gamepadGroup.add(bodyMesh);
+        const magentaMat = new THREE.MeshBasicMaterial({
+            color: 0xff2d75,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.3
+        });
 
-        const bodyWireMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true, transparent: true, opacity: 0.35 });
-        const bodyWire = new THREE.Mesh(bodyGeo, bodyWireMat);
-        gamepadGroup.add(bodyWire);
+        const objectCount = 36;
+        for (let i = 0; i < objectCount; i++) {
+            let mesh;
+            const rand = i % 4;
 
-        // Left Grip
-        const gripGeo = new THREE.CylinderGeometry(0.75, 0.5, 3.2, 8);
-        const leftGrip = new THREE.Mesh(gripGeo, bodyMat);
-        leftGrip.position.set(-2.3, -1.2, 0);
-        leftGrip.rotation.z = Math.PI / 5.5; // angle left grip
-        gamepadGroup.add(leftGrip);
+            if (rand === 0) {
+                // Triangle: 3-sided cone
+                const geo = new THREE.ConeGeometry(0.45, 0.8, 3);
+                mesh = new THREE.Mesh(geo, magentaMat);
+            } else if (rand === 1) {
+                // Circle: Torus ring
+                const geo = new THREE.TorusGeometry(0.35, 0.08, 8, 24);
+                mesh = new THREE.Mesh(geo, cyanMat);
+            } else if (rand === 2) {
+                // Square: thin box
+                const geo = new THREE.BoxGeometry(0.65, 0.65, 0.12);
+                mesh = new THREE.Mesh(geo, cyanMat);
+            } else {
+                // Cross: two thin intersected boxes
+                mesh = new THREE.Group();
+                const barGeo = new THREE.BoxGeometry(0.7, 0.12, 0.12);
+                
+                const bar1 = new THREE.Mesh(barGeo, magentaMat);
+                bar1.rotation.z = Math.PI / 4;
+                mesh.add(bar1);
+                
+                const bar2 = new THREE.Mesh(barGeo, magentaMat);
+                bar2.rotation.z = -Math.PI / 4;
+                mesh.add(bar2);
+            }
 
-        const leftGripWire = new THREE.Mesh(gripGeo, bodyWireMat);
-        leftGripWire.position.copy(leftGrip.position);
-        leftGripWire.rotation.copy(leftGrip.rotation);
-        gamepadGroup.add(leftGripWire);
+            // Random positions scattered across the screen (keeping center vacant on desktop)
+            const isMobile = window.innerWidth < 992;
+            const spreadX = isMobile ? 12 : 24;
+            const spreadY = isMobile ? 16 : 14;
 
-        // Right Grip
-        const rightGrip = new THREE.Mesh(gripGeo, bodyMat);
-        rightGrip.position.set(2.3, -1.2, 0);
-        rightGrip.rotation.z = -Math.PI / 5.5; // angle right grip
-        gamepadGroup.add(rightGrip);
+            let posX;
+            const rawX = (Math.random() - 0.5) * spreadX * 1.5;
+            if (!isMobile && Math.abs(rawX) < 6.5) {
+                // Push to the left or right side to keep center clean
+                posX = rawX < 0 ? rawX - 6.5 : rawX + 6.5;
+            } else {
+                posX = rawX;
+            }
 
-        const rightGripWire = new THREE.Mesh(gripGeo, bodyWireMat);
-        rightGripWire.position.copy(rightGrip.position);
-        rightGripWire.rotation.copy(rightGrip.rotation);
-        gamepadGroup.add(rightGripWire);
+            mesh.position.set(
+                posX,
+                (Math.random() - 0.5) * spreadY * 1.5,
+                (Math.random() - 0.5) * 12 - 2
+            );
 
-        // Thumbsticks (two cylinders)
-        const stickGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.5, 8);
-        const stickMat = new THREE.MeshStandardMaterial({ color: 0xff2d75, emissive: 0xff2d75, emissiveIntensity: 0.2, metalness: 0.9, roughness: 0.1 });
-        const stickWireMat = new THREE.MeshBasicMaterial({ color: 0xff2d75, wireframe: true });
+            // Random scaling
+            const scale = 0.6 + Math.random() * 0.8;
+            mesh.scale.set(scale, scale, scale);
 
-        const leftStick = new THREE.Mesh(stickGeo, stickMat);
-        leftStick.position.set(-1.0, -0.2, 0.7);
-        leftStick.rotation.x = Math.PI / 2;
-        gamepadGroup.add(leftStick);
+            // Random rotation speeds
+            const rotSpeed = {
+                x: (Math.random() - 0.5) * 0.015,
+                y: (Math.random() - 0.5) * 0.015,
+                z: (Math.random() - 0.5) * 0.010
+            };
 
-        const leftStickWire = new THREE.Mesh(stickGeo, stickWireMat);
-        leftStickWire.position.copy(leftStick.position);
-        leftStickWire.rotation.copy(leftStick.rotation);
-        gamepadGroup.add(leftStickWire);
+            // Random drifting
+            const velocity = new THREE.Vector3(
+                (Math.random() - 0.5) * 0.008,
+                (Math.random() - 0.5) * 0.008,
+                (Math.random() - 0.5) * 0.004
+            );
 
-        const rightStick = new THREE.Mesh(stickGeo, stickMat);
-        rightStick.position.set(1.0, -0.2, 0.7);
-        rightStick.rotation.x = Math.PI / 2;
-        gamepadGroup.add(rightStick);
+            gemFieldGroup.add(mesh);
+            gems.push({
+                mesh,
+                rotSpeed,
+                velocity,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
 
-        const rightStickWire = new THREE.Mesh(stickGeo, stickWireMat);
-        rightStickWire.position.copy(rightStick.position);
-        rightStickWire.rotation.copy(rightStick.rotation);
-        gamepadGroup.add(rightStickWire);
-
-        // D-Pad (cross shape)
-        const dpadHorizGeo = new THREE.BoxGeometry(1.2, 0.4, 0.3);
-        const dpadVertGeo = new THREE.BoxGeometry(0.4, 1.2, 0.3);
-        const dpadMat = new THREE.MeshStandardMaterial({ color: 0x00f0ff, emissive: 0x00f0ff, emissiveIntensity: 0.4 });
-        const dpadWireMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true });
-
-        const dpadH = new THREE.Mesh(dpadHorizGeo, dpadMat);
-        dpadH.position.set(-1.9, 0.5, 0.7);
-        gamepadGroup.add(dpadH);
-
-        const dpadHW = new THREE.Mesh(dpadHorizGeo, dpadWireMat);
-        dpadHW.position.copy(dpadH.position);
-        gamepadGroup.add(dpadHW);
-
-        const dpadV = new THREE.Mesh(dpadVertGeo, dpadMat);
-        dpadV.position.set(-1.9, 0.5, 0.7);
-        gamepadGroup.add(dpadV);
-
-        const dpadVW = new THREE.Mesh(dpadVertGeo, dpadWireMat);
-        dpadVW.position.copy(dpadV.position);
-        gamepadGroup.add(dpadVW);
-
-        // Action Buttons (4 small spheres in diamond layout)
-        const btnGeo = new THREE.SphereGeometry(0.24, 6, 6);
-        const btnMatY = new THREE.MeshStandardMaterial({ color: 0xff2d75, emissive: 0xff2d75, emissiveIntensity: 0.8 }); // Y (top) - Magenta
-        const btnMatB = new THREE.MeshStandardMaterial({ color: 0x00f0ff, emissive: 0x00f0ff, emissiveIntensity: 0.8 }); // B (right) - Cyan
-        const btnMatA = new THREE.MeshStandardMaterial({ color: 0x00ff88, emissive: 0x00ff88, emissiveIntensity: 0.8 }); // A (bottom) - Green
-        const btnMatX = new THREE.MeshStandardMaterial({ color: 0xffd700, emissive: 0xffd700, emissiveIntensity: 0.8 }); // X (left) - Gold
-
-        const btnY = new THREE.Mesh(btnGeo, btnMatY); btnY.position.set(1.9, 0.8, 0.7); gamepadGroup.add(btnY);
-        const btnA = new THREE.Mesh(btnGeo, btnMatA); btnA.position.set(1.9, 0.2, 0.7); gamepadGroup.add(btnA);
-        const btnX = new THREE.Mesh(btnGeo, btnMatX); btnX.position.set(1.6, 0.5, 0.7); gamepadGroup.add(btnX);
-        const btnB = new THREE.Mesh(btnGeo, btnMatB); btnB.position.set(2.2, 0.5, 0.7); gamepadGroup.add(btnB);
-
-        scene.add(gamepadGroup);
+        scene.add(gemFieldGroup);
     }
 
     // ─── CONSTELLATION NODE NETWORK ─────
@@ -257,22 +256,47 @@
         requestAnimationFrame(animate);
         const t = clock.getElapsedTime();
 
-        // 1. Responsive placement & Scroll offset of the Gamepad
+        // 1. Update Floating Gem Field (Drift, rotate, hover, scroll parallax)
         const isMobile = window.innerWidth < 992;
-        const targetX = isMobile ? 0 : 7;
-        const crystalScrollFactor = isMobile ? 0.015 : 0.024;
+        if (hasHero && gemFieldGroup) {
+            // Scroll parallax for the entire field of gems
+            const gemScrollFactor = isMobile ? 0.010 : 0.018;
+            gemFieldGroup.position.y = -scrollY * gemScrollFactor;
 
-        if (hasHero && gamepadGroup) {
-            gamepadGroup.position.x = targetX;
+            // Animate individual gems
+            gems.forEach((gem) => {
+                gem.mesh.rotation.x += gem.rotSpeed.x;
+                gem.mesh.rotation.y += gem.rotSpeed.y;
+                gem.mesh.rotation.z += gem.rotSpeed.z;
 
-            // Floating hover motion
-            const currentY = (isMobile ? -2.2 : 0) - scrollY * crystalScrollFactor;
-            gamepadGroup.position.y = currentY + Math.sin(t * 1.5) * 0.3;
+                // Drift motion
+                gem.mesh.position.add(gem.velocity);
 
-            // 2. Gamepad Rotation
-            gamepadGroup.rotation.y = t * 0.35;
-            gamepadGroup.rotation.x = Math.sin(t * 0.5) * 0.18;
-            gamepadGroup.rotation.z = Math.cos(t * 0.5) * 0.08;
+                // Hover oscillation
+                gem.mesh.position.y += Math.sin(t * 0.7 + gem.phase) * 0.003;
+
+                // Bounds checking
+                // If a gem moves too far, bounce it back
+                const boundX = isMobile ? 12 : 22;
+                const boundY = isMobile ? 16 : 14;
+                if (Math.abs(gem.mesh.position.x) > boundX) {
+                    gem.velocity.x *= -1;
+                }
+                if (Math.abs(gem.mesh.position.y) > boundY) {
+                    gem.velocity.y *= -1;
+                }
+                if (gem.mesh.position.z < -12 || gem.mesh.position.z > 6) {
+                    gem.velocity.z *= -1;
+                }
+
+                // Keep the desktop middle area vacant (X between -6.5 and 6.5)
+                if (!isMobile && Math.abs(gem.mesh.position.x) < 6.5) {
+                    // Bounce away from center
+                    gem.velocity.x *= -1;
+                    // Slightly push it out to prevent getting stuck
+                    gem.mesh.position.x = gem.mesh.position.x < 0 ? -6.55 : 6.55;
+                }
+            });
         }
 
         // 3. Update Constellation Nodes (Particles)
