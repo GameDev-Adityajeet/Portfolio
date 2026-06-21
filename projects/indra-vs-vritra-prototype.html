@@ -7,7 +7,7 @@
     <meta name="description"
         content="Indra vs Vritra — Unity Narration Adventure Game Prototype by Adityajeet Yadav">
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <title>Indra vs Vritra | Adityajeet Yadav</title>
@@ -44,7 +44,7 @@
         .lb-img-wrap img {
             max-width: 92vw;
             max-height: 88vh;
-            border-radius: 12px;
+            border-radius: 0;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
             display: block;
             object-fit: contain;
@@ -62,7 +62,8 @@
             right: 26px;
             width: 46px;
             height: 46px;
-            border-radius: 50%;
+            border-radius: 0;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
@@ -76,7 +77,7 @@
         }
 
         .lb-close:hover {
-            background: rgba(200, 160, 40, 0.4);
+            background: rgba(0, 240, 255, 0.35);
         }
 
         .lb-arrow {
@@ -85,7 +86,8 @@
             transform: translateY(-50%);
             width: 50px;
             height: 50px;
-            border-radius: 50%;
+            border-radius: 0;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.18);
             color: #fff;
@@ -99,7 +101,7 @@
         }
 
         .lb-arrow:hover {
-            background: rgba(200, 160, 40, 0.3);
+            background: rgba(0, 240, 255, 0.25);
         }
 
         .lb-prev { left: 20px; }
@@ -123,7 +125,7 @@
 
         .gallery-item img:hover {
             transform: scale(1.03);
-            box-shadow: 0 0 30px rgba(200, 160, 40, 0.25);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25);
         }
 
         /* ── HERO TWO-COLUMN ── */
@@ -157,7 +159,7 @@
         .deco-blob-1 {
             width: 260px;
             height: 260px;
-            background: rgba(200, 160, 30, 0.2);
+            background: rgba(0, 240, 255, 0.18);
             top: -30px;
             right: -20px;
             animation: blob-drift 6s ease-in-out infinite;
@@ -166,7 +168,7 @@
         .deco-blob-2 {
             width: 200px;
             height: 200px;
-            background: rgba(180, 120, 20, 0.15);
+            background: rgba(255, 45, 117, 0.14);
             bottom: -20px;
             left: -10px;
             animation: blob-drift 8s ease-in-out infinite reverse;
@@ -180,13 +182,14 @@
         .deco-card {
             position: relative;
             width: 380px;
-            border-radius: 18px;
+            border-radius: 0;
+            clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
             overflow: hidden;
-            border: 1px solid rgba(200, 160, 40, 0.35);
+            border: 1px solid rgba(0, 240, 255, 0.35);
             box-shadow:
-                0 0 0 1px rgba(180, 130, 20, 0.15),
+                0 0 0 1px rgba(0, 240, 255, 0.12),
                 0 20px 60px rgba(0, 0, 0, 0.7),
-                0 0 40px rgba(200, 160, 30, 0.2);
+                0 0 40px rgba(0, 240, 255, 0.2);
             transform: rotate(-3deg) translateY(0px);
             animation: card-float 5s ease-in-out infinite;
             transition: transform 0.4s, box-shadow 0.4s;
@@ -196,9 +199,9 @@
         .deco-card:hover {
             transform: rotate(0deg) scale(1.04) translateY(-6px);
             box-shadow:
-                0 0 0 1px rgba(200, 160, 40, 0.35),
+                0 0 0 1px rgba(0, 240, 255, 0.3),
                 0 30px 80px rgba(0, 0, 0, 0.8),
-                0 0 60px rgba(200, 160, 30, 0.4);
+                0 0 60px rgba(0, 240, 255, 0.4);
             animation: none;
         }
 
@@ -232,12 +235,12 @@
         }
 
         .deco-card-footer {
-            background: rgba(15, 10, 0, 0.92);
+            background: rgba(5, 5, 15, 0.9);
             padding: 0.85rem 1.1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 1px solid rgba(200, 160, 40, 0.2);
+            border-top: 1px solid rgba(0, 240, 255, 0.18);
         }
 
         .dcf-title {
@@ -251,29 +254,30 @@
             font-size: 0.68rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(200, 170, 60, 0.75);
+            color: rgba(0, 240, 255, 0.7);
         }
 
         .deco-ribbon {
             position: absolute;
             top: 14px;
             right: -2px;
-            background: linear-gradient(135deg, #c89020, #886010);
-            color: #fff;
+            background: linear-gradient(135deg, #00f0ff, #0090aa);
+            color: #0a0a0f;
             font-size: 0.65rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 4px 14px 4px 10px;
-            border-radius: 4px 0 0 4px;
-            box-shadow: 0 4px 12px rgba(200, 140, 20, 0.5);
+            border-radius: 0;
+            clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+            box-shadow: 0 4px 12px rgba(0, 240, 255, 0.45);
             z-index: 3;
         }
 
         .deco-sparkle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(220, 180, 60, 0.85);
+            background: rgba(0, 240, 255, 0.8);
             pointer-events: none;
             animation: sparkle-blink 2.5s ease-in-out infinite;
         }
@@ -293,7 +297,13 @@
     </style>
 </head>
 
-<body>
+<body class="has-custom-cursor">
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- THREE.JS FULL BG CANVAS -->
+    <canvas id="hero-canvas"></canvas>
 
     <!-- TOP NAV -->
     <nav class="proj-nav">
@@ -307,7 +317,7 @@
 
     <!-- HERO BANNER -->
     <header class="proj-hero">
-        <div class="proj-hero-bg" style="background: linear-gradient(135deg, #1a1000, #332800, #554400, #3a2800);">
+        <div class="proj-hero-bg" style="background: linear-gradient(135deg, #0a0a0f, #0d1117, #0a1628, #060d18);">
         </div>
         <div class="proj-hero-content">
             <div class="proj-engine-tag">Unity · C# · Mixamo · Narration Adventure</div>
@@ -385,7 +395,7 @@
     <section class="proj-section">
         <h2 class="proj-section-title">Gameplay Video</h2>
         <div class="proj-section-line"></div>
-        <div style="width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;">
+        <div style="width:100%;aspect-ratio:16/9;overflow:hidden;">
             <iframe
                 src="https://www.youtube.com/embed/7X5fecFw0wo"
                 title="Indra vs Vritra — Gameplay Video"
@@ -467,6 +477,9 @@
         });
     </script>
 
+    <!-- THREE.JS & SITE SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 </html>

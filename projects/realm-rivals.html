@@ -7,7 +7,7 @@
     <meta name="description"
         content="Realm Rivals — Unreal Engine 5 LAN Multiplayer Arena Game by Adityajeet Yadav">
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <title>Realm Rivals | Adityajeet Yadav</title>
@@ -44,7 +44,7 @@
         .lb-img-wrap img {
             max-width: 92vw;
             max-height: 88vh;
-            border-radius: 12px;
+            border-radius: 4px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
             display: block;
             object-fit: contain;
@@ -62,9 +62,9 @@
             right: 26px;
             width: 46px;
             height: 46px;
-            border-radius: 50%;
+            border-radius: 0;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 240, 255, 0.3);
             color: #fff;
             font-size: 1.5rem;
             cursor: pointer;
@@ -73,10 +73,11 @@
             justify-content: center;
             transition: background 0.2s;
             z-index: 9001;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
         }
 
         .lb-close:hover {
-            background: rgba(120, 50, 200, 0.4);
+            background: rgba(0, 240, 255, 0.35);
         }
 
         .lb-arrow {
@@ -85,9 +86,9 @@
             transform: translateY(-50%);
             width: 50px;
             height: 50px;
-            border-radius: 50%;
+            border-radius: 0;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(0, 240, 255, 0.25);
             color: #fff;
             font-size: 1.5rem;
             cursor: pointer;
@@ -96,10 +97,11 @@
             justify-content: center;
             transition: background 0.2s;
             z-index: 9001;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
         }
 
         .lb-arrow:hover {
-            background: rgba(120, 50, 200, 0.3);
+            background: rgba(0, 240, 255, 0.25);
         }
 
         .lb-prev { left: 20px; }
@@ -123,7 +125,7 @@
 
         .gallery-item img:hover {
             transform: scale(1.03);
-            box-shadow: 0 0 30px rgba(120, 50, 200, 0.25);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25);
         }
 
         /* ── HERO TWO-COLUMN ── */
@@ -157,7 +159,7 @@
         .deco-blob-1 {
             width: 260px;
             height: 260px;
-            background: rgba(120, 40, 200, 0.2);
+            background: rgba(0, 240, 255, 0.18);
             top: -30px;
             right: -20px;
             animation: blob-drift 6s ease-in-out infinite;
@@ -166,7 +168,7 @@
         .deco-blob-2 {
             width: 200px;
             height: 200px;
-            background: rgba(180, 60, 255, 0.12);
+            background: rgba(255, 45, 117, 0.14);
             bottom: -20px;
             left: -10px;
             animation: blob-drift 8s ease-in-out infinite reverse;
@@ -180,25 +182,26 @@
         .deco-card {
             position: relative;
             width: 380px;
-            border-radius: 18px;
+            border-radius: 0;
             overflow: hidden;
-            border: 1px solid rgba(120, 50, 200, 0.4);
+            border: 1px solid rgba(0, 240, 255, 0.35);
             box-shadow:
-                0 0 0 1px rgba(100, 40, 180, 0.15),
+                0 0 0 1px rgba(0, 240, 255, 0.12),
                 0 20px 60px rgba(0, 0, 0, 0.7),
-                0 0 40px rgba(120, 50, 200, 0.2);
+                0 0 40px rgba(0, 240, 255, 0.2);
             transform: rotate(-3deg) translateY(0px);
             animation: card-float 5s ease-in-out infinite;
             transition: transform 0.4s, box-shadow 0.4s;
             cursor: pointer;
+            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
         }
 
         .deco-card:hover {
             transform: rotate(0deg) scale(1.04) translateY(-6px);
             box-shadow:
-                0 0 0 1px rgba(120, 50, 200, 0.4),
+                0 0 0 1px rgba(0, 240, 255, 0.4),
                 0 30px 80px rgba(0, 0, 0, 0.8),
-                0 0 60px rgba(120, 50, 200, 0.45);
+                0 0 60px rgba(0, 240, 255, 0.45);
             animation: none;
         }
 
@@ -232,12 +235,12 @@
         }
 
         .deco-card-footer {
-            background: rgba(10, 5, 20, 0.92);
+            background: rgba(10, 10, 15, 0.92);
             padding: 0.85rem 1.1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 1px solid rgba(120, 50, 200, 0.2);
+            border-top: 1px solid rgba(0, 240, 255, 0.18);
         }
 
         .dcf-title {
@@ -251,29 +254,30 @@
             font-size: 0.68rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(180, 100, 255, 0.75);
+            color: rgba(0, 240, 255, 0.7);
         }
 
         .deco-ribbon {
             position: absolute;
             top: 14px;
             right: -2px;
-            background: linear-gradient(135deg, #7b2fff, #5018a0);
-            color: #fff;
+            background: linear-gradient(135deg, #00f0ff, #0088aa);
+            color: #0a0a0f;
             font-size: 0.65rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 4px 14px 4px 10px;
-            border-radius: 4px 0 0 4px;
-            box-shadow: 0 4px 12px rgba(120, 50, 200, 0.5);
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0, 240, 255, 0.5);
             z-index: 3;
+            clip-path: polygon(4px 0, 100% 0, 100% 100%, 0 100%);
         }
 
         .deco-sparkle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(180, 100, 255, 0.85);
+            background: rgba(0, 240, 255, 0.8);
             pointer-events: none;
             animation: sparkle-blink 2.5s ease-in-out infinite;
         }
@@ -293,7 +297,13 @@
     </style>
 </head>
 
-<body>
+<body class="has-custom-cursor">
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- THREE.JS FULL BG CANVAS -->
+    <canvas id="hero-canvas"></canvas>
 
     <!-- TOP NAV -->
     <nav class="proj-nav">
@@ -393,7 +403,7 @@
     <section class="proj-section">
         <h2 class="proj-section-title">Gameplay Video</h2>
         <div class="proj-section-line"></div>
-        <div style="width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;">
+        <div style="width:100%;aspect-ratio:16/9;border-radius:0;overflow:hidden;">
             <iframe
                 src="https://www.youtube.com/embed/Pl3C-Bl0fmI"
                 title="Realm Rivals — Gameplay Video"
@@ -478,6 +488,9 @@
         });
     </script>
 
+    <!-- THREE.JS & SITE SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 </html>
