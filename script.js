@@ -76,106 +76,188 @@
     const pointLight3 = new THREE.PointLight(0xa855f7, 1.5, 40);
     pointLight3.position.set(0, -14, 8);
     scene.add(pointLight3);
+    // ─── CANVAS LOGO TEXTURE GENERATORS ─────
+    function createUnityTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 256;
+        canvas.height = 256;
+        const ctx = canvas.getContext('2d');
+        
+        ctx.clearRect(0, 0, 256, 256);
+        
+        // Setup glow styling
+        ctx.shadowColor = '#00f0ff';
+        ctx.shadowBlur = 15;
+        ctx.strokeStyle = '#00f0ff';
+        ctx.lineWidth = 10;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        const cx = 128;
+        const cy = 128;
+        const s = 65; // side length
+        
+        // 3D isometric cube outline
+        // Draw inner spokes from center to three vertices
+        ctx.beginPath();
+        // Spoke to top
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx, cy - s);
+        // Spoke to bottom-left
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx - s * 0.866, cy + s * 0.5);
+        // Spoke to bottom-right
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + s * 0.866, cy + s * 0.5);
+        ctx.stroke();
+        
+        // Draw outer hexagon contour
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - s); // top
+        ctx.lineTo(cx + s * 0.866, cy - s * 0.5); // top-right
+        ctx.lineTo(cx + s * 0.866, cy + s * 0.5); // bottom-right
+        ctx.lineTo(cx, cy + s); // bottom
+        ctx.lineTo(cx - s * 0.866, cy + s * 0.5); // bottom-left
+        ctx.lineTo(cx - s * 0.866, cy - s * 0.5); // top-left
+        ctx.closePath();
+        ctx.stroke();
+        
+        return new THREE.CanvasTexture(canvas);
+    }
 
-    // ─── HERO 3D OBJECTS: Floating Gaming Symbols (PlayStation-style) ─────
+    function createUnrealTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 256;
+        canvas.height = 256;
+        const ctx = canvas.getContext('2d');
+        
+        ctx.clearRect(0, 0, 256, 256);
+        
+        // Setup glow styling
+        ctx.shadowColor = '#ff2d75';
+        ctx.shadowBlur = 15;
+        ctx.strokeStyle = '#ff2d75';
+        ctx.lineWidth = 8;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        const cx = 128;
+        const cy = 128;
+        
+        // Draw outer circle
+        ctx.beginPath();
+        ctx.arc(cx, cy, 90, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        // Draw stylized 'U'
+        ctx.beginPath();
+        ctx.lineWidth = 14;
+        
+        // Outer curve of U
+        ctx.moveTo(90, 75);
+        ctx.lineTo(90, 130);
+        ctx.bezierCurveTo(90, 185, 166, 185, 166, 130);
+        ctx.lineTo(166, 75);
+        ctx.stroke();
+        
+        // Top outward-pointing ticks/serifs
+        ctx.beginPath();
+        ctx.lineWidth = 8;
+        ctx.moveTo(90, 75);
+        ctx.lineTo(75, 75);
+        ctx.moveTo(166, 75);
+        ctx.lineTo(181, 75);
+        ctx.stroke();
+        
+        return new THREE.CanvasTexture(canvas);
+    }
+
+    // ─── HERO 3D OBJECTS: Floating Unity/Unreal Bubbles ─────
     const hasHero = !!document.querySelector('.hero');
-    const gemFieldGroup = new THREE.Group();
-    const gems = []; // stores our floating gaming elements
-
+    const bubbleFieldGroup = new THREE.Group();
+    const bubbles = [];
+    
     if (hasHero) {
-        // Setup materials with subtle glow/wireframe
-        const cyanMat = new THREE.MeshBasicMaterial({
-            color: 0x00f0ff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-        const magentaMat = new THREE.MeshBasicMaterial({
-            color: 0xff2d75,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-
-        const objectCount = 36;
-        for (let i = 0; i < objectCount; i++) {
-            let mesh;
-            const rand = i % 4;
-
-            if (rand === 0) {
-                // Triangle: 3-sided cone
-                const geo = new THREE.ConeGeometry(0.45, 0.8, 3);
-                mesh = new THREE.Mesh(geo, magentaMat);
-            } else if (rand === 1) {
-                // Circle: Torus ring
-                const geo = new THREE.TorusGeometry(0.35, 0.08, 8, 24);
-                mesh = new THREE.Mesh(geo, cyanMat);
-            } else if (rand === 2) {
-                // Square: thin box
-                const geo = new THREE.BoxGeometry(0.65, 0.65, 0.12);
-                mesh = new THREE.Mesh(geo, cyanMat);
-            } else {
-                // Cross: two thin intersected boxes
-                mesh = new THREE.Group();
-                const barGeo = new THREE.BoxGeometry(0.7, 0.12, 0.12);
-                
-                const bar1 = new THREE.Mesh(barGeo, magentaMat);
-                bar1.rotation.z = Math.PI / 4;
-                mesh.add(bar1);
-                
-                const bar2 = new THREE.Mesh(barGeo, magentaMat);
-                bar2.rotation.z = -Math.PI / 4;
-                mesh.add(bar2);
-            }
-
-            // Random positions scattered across the screen (keeping center vacant on desktop)
-            const isMobile = window.innerWidth < 992;
-            const spreadX = isMobile ? 12 : 24;
-            const spreadY = isMobile ? 16 : 14;
-
-            let posX;
-            const rawX = (Math.random() - 0.5) * spreadX * 1.5;
-            if (!isMobile && Math.abs(rawX) < 6.5) {
-                // Push to the left or right side to keep center clean
-                posX = rawX < 0 ? rawX - 6.5 : rawX + 6.5;
-            } else {
-                posX = rawX;
-            }
-
-            mesh.position.set(
-                posX,
-                (Math.random() - 0.5) * spreadY * 1.5,
-                (Math.random() - 0.5) * 12 - 2
+        const unityTex = createUnityTexture();
+        const unrealTex = createUnrealTexture();
+        
+        const bubbleCount = 14;
+        
+        // Geometries
+        const sphereGeo = new THREE.SphereGeometry(0.55, 20, 20);
+        const logoGeo = new THREE.PlaneGeometry(0.7, 0.7);
+        
+        for (let i = 0; i < bubbleCount; i++) {
+            const isUnity = i % 2 === 0;
+            const tex = isUnity ? unityTex : unrealTex;
+            
+            // Outer glass bubble shell
+            const shellMat = new THREE.MeshPhongMaterial({
+                color: isUnity ? 0x00f0ff : 0xff2d75,
+                emissive: isUnity ? 0x00f0ff : 0xff2d75,
+                emissiveIntensity: 0.15,
+                specular: 0xffffff,
+                shininess: 90,
+                transparent: true,
+                opacity: 0.12,
+                depthWrite: false
+            });
+            const shell = new THREE.Mesh(sphereGeo, shellMat);
+            
+            // Inner logo plane
+            const logoMat = new THREE.MeshBasicMaterial({
+                map: tex,
+                transparent: true,
+                opacity: 0.45,
+                side: THREE.DoubleSide,
+                depthWrite: false
+            });
+            const logo = new THREE.Mesh(logoGeo, logoMat);
+            
+            // Group them
+            const group = new THREE.Group();
+            group.add(shell);
+            group.add(logo);
+            
+            // Random positioning across screen dynamically based on camera frustum
+            const aspect = window.innerWidth / window.innerHeight;
+            const frustumHeight = 2 * camera.position.z * Math.tan((camera.fov * Math.PI) / 360);
+            const frustumWidth = frustumHeight * aspect;
+            
+            group.position.set(
+                (Math.random() - 0.5) * frustumWidth * 1.5,
+                (Math.random() - 0.5) * frustumHeight * 1.5,
+                (Math.random() - 0.5) * 8 - 2
             );
-
+            
             // Random scaling
-            const scale = 0.6 + Math.random() * 0.8;
-            mesh.scale.set(scale, scale, scale);
-
-            // Random rotation speeds
-            const rotSpeed = {
-                x: (Math.random() - 0.5) * 0.015,
-                y: (Math.random() - 0.5) * 0.015,
-                z: (Math.random() - 0.5) * 0.010
-            };
-
-            // Random drifting
+            const scale = 0.8 + Math.random() * 0.7;
+            group.scale.set(scale, scale, scale);
+            
+            // Random velocities
             const velocity = new THREE.Vector3(
-                (Math.random() - 0.5) * 0.008,
-                (Math.random() - 0.5) * 0.008,
-                (Math.random() - 0.5) * 0.004
+                (Math.random() - 0.5) * 0.007,
+                (Math.random() - 0.5) * 0.007,
+                (Math.random() - 0.5) * 0.003
             );
-
-            gemFieldGroup.add(mesh);
-            gems.push({
-                mesh,
-                rotSpeed,
+            
+            // Random rotation speed for the logo plane inside
+            const rotSpeed = (Math.random() - 0.5) * 0.012;
+            const phase = Math.random() * Math.PI * 2;
+            
+            bubbleFieldGroup.add(group);
+            bubbles.push({
+                group,
+                shellMat,
+                logoMat,
+                logo,
                 velocity,
-                phase: Math.random() * Math.PI * 2
+                rotSpeed,
+                phase
             });
         }
-
-        scene.add(gemFieldGroup);
+        
+        scene.add(bubbleFieldGroup);
     }
 
     // ─── CONSTELLATION NODE NETWORK ─────
@@ -255,50 +337,65 @@
     function animate() {
         requestAnimationFrame(animate);
         const t = clock.getElapsedTime();
-
-        // 1. Update Floating Gem Field (Drift, rotate, hover, scroll parallax)
+        // 1. Update Floating Bubbles (Drift, rotate, hover, fade near center)
         const isMobile = window.innerWidth < 992;
-        if (hasHero && gemFieldGroup) {
-            // Scroll parallax for the entire field of gems
-            const gemScrollFactor = isMobile ? 0.010 : 0.018;
-            gemFieldGroup.position.y = -scrollY * gemScrollFactor;
-
-            // Animate individual gems
-            gems.forEach((gem) => {
-                gem.mesh.rotation.x += gem.rotSpeed.x;
-                gem.mesh.rotation.y += gem.rotSpeed.y;
-                gem.mesh.rotation.z += gem.rotSpeed.z;
-
-                // Drift motion
-                gem.mesh.position.add(gem.velocity);
-
+        if (hasHero && bubbleFieldGroup) {
+            // Scroll parallax for the entire field of bubbles
+            const scrollFactor = isMobile ? 0.008 : 0.015;
+            bubbleFieldGroup.position.y = -scrollY * scrollFactor;
+            
+            bubbles.forEach((bubble) => {
+                // Update position via velocity
+                bubble.group.position.add(bubble.velocity);
+                
+                // Slowly rotate the inner logo plane
+                bubble.logo.rotation.y += bubble.rotSpeed;
+                bubble.logo.rotation.x += bubble.rotSpeed * 0.5;
+                
                 // Hover oscillation
-                gem.mesh.position.y += Math.sin(t * 0.7 + gem.phase) * 0.003;
-
-                // Bounds checking
-                // If a gem moves too far, bounce it back
-                const boundX = isMobile ? 12 : 22;
-                const boundY = isMobile ? 16 : 14;
-                if (Math.abs(gem.mesh.position.x) > boundX) {
-                    gem.velocity.x *= -1;
+                bubble.group.position.y += Math.sin(t * 0.6 + bubble.phase) * 0.002;
+                
+                // Viewport boundary collision bouncing dynamically based on camera frustum
+                const aspect = window.innerWidth / window.innerHeight;
+                const frustumHeight = 2 * camera.position.z * Math.tan((camera.fov * Math.PI) / 360);
+                const frustumWidth = frustumHeight * aspect;
+                
+                const boundX = frustumWidth / 2 + 1.0;
+                const boundY = frustumHeight / 2 + 1.0;
+                
+                if (Math.abs(bubble.group.position.x) > boundX) {
+                    bubble.velocity.x *= -1;
+                    // Push slightly back to prevent sticky edges
+                    bubble.group.position.x = Math.sign(bubble.group.position.x) * boundX;
                 }
-                if (Math.abs(gem.mesh.position.y) > boundY) {
-                    gem.velocity.y *= -1;
+                if (Math.abs(bubble.group.position.y) > boundY) {
+                    bubble.velocity.y *= -1;
+                    bubble.group.position.y = Math.sign(bubble.group.position.y) * boundY;
                 }
-                if (gem.mesh.position.z < -12 || gem.mesh.position.z > 6) {
-                    gem.velocity.z *= -1;
+                if (bubble.group.position.z < -10 || bubble.group.position.z > 6) {
+                    bubble.velocity.z *= -1;
                 }
-
-                // Keep the desktop middle area vacant (X between -6.5 and 6.5)
-                if (!isMobile && Math.abs(gem.mesh.position.x) < 6.5) {
-                    // Bounce away from center
-                    gem.velocity.x *= -1;
-                    // Slightly push it out to prevent getting stuck
-                    gem.mesh.position.x = gem.mesh.position.x < 0 ? -6.55 : 6.55;
+                
+                // Elliptical exclusion zone fading (so bubbles dissolve near main text)
+                // Center text area approx: width 9 units, height 6 units in 3D scene coordinate space
+                const rx = isMobile ? 5.5 : 8.5;
+                const ry = isMobile ? 7.5 : 5.0;
+                
+                const normX = bubble.group.position.x / rx;
+                const normY = bubble.group.position.y / ry;
+                const dist = Math.sqrt(normX * normX + normY * normY);
+                
+                let opacityFactor = 1.0;
+                if (dist < 1.0) {
+                    // Smoothly fade from 0 (at center) to 1 (at outer boundary)
+                    opacityFactor = THREE.MathUtils.smoothstep(dist, 0.15, 1.0);
                 }
+                
+                // Apply the opacity factor to the materials
+                bubble.shellMat.opacity = 0.12 * opacityFactor;
+                bubble.logoMat.opacity = 0.45 * opacityFactor;
             });
         }
-
         // 3. Update Constellation Nodes (Particles)
         let vertexpos = 0;
         let colorpos = 0;
