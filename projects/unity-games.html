@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Games | Adityajeet Yadav Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body class="has-custom-cursor">
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- THREE.JS FULL BG CANVAS -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- TOP NAV -->
+    <nav class="proj-nav">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <span class="proj-nav-label">Unity Zone</span>
+        <span></span>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main class="page-container" style="padding: 120px 5% 80px 5%; position: relative; z-index: 10;">
+        <div class="section-header" style="margin-bottom: 3.5rem;">
+            <span class="section-prefix">◈ Stage.04-A // Level Select</span>
+            <h2 class="section-title">Unity Games</h2>
+            <div class="title-line"></div>
+            <p style="color: var(--text-dim); font-family: var(--font-body); font-size: 0.95rem; margin-top: 1rem; max-width: 600px; line-height: 1.6;">
+                A collection of interactive games developed in the Unity Engine, featuring mobile arcade mechanics, custom touch controls, physics simulations, and 3D first-person shooter systems.
+            </p>
+        </div>
+
+        <div class="projects-grid">
+
+            <!-- PROJECT 1: Paint Runner -->
+            <div class="project-card tilt-card" onclick="window.location.href='paint-runner.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-2">
+                    <img src="Paint%20Runner/Screenshot_20260405_161250_It%27s%20Me%20Pico.jpg.jpeg" alt="Paint Runner preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">Unity · Mobile</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">Mobile Casual Game</span>
+                    <h3 class="proj-title">Paint Runner</h3>
+                    <p class="proj-desc">A mobile game where you walk on a floor to paint it — dominate the arena by painting more boxes than the enemy before the timer runs out.</p>
+                    <div class="proj-tags"><span>Unity</span><span>C#</span><span>Mobile</span><span>Casual</span></div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT 2: BubbleBoom -->
+            <div class="project-card tilt-card" onclick="window.location.href='bubbleboom.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-5">
+                    <img src="BubbleBoom/BB1.png" alt="BubbleBoom preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">Unity · GGJ 2025</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">2D Arcade — 🥉 GGJ 2025</span>
+                    <h3 class="proj-title">BubbleBoom</h3>
+                    <p class="proj-desc">Built in 48 hours for Global Game Jam 2025 — bubble-shooting mechanics with
+                        chain reactions and progressive difficulty.</p>
+                    <div class="proj-tags"><span>Unity</span><span>C#</span><span>2D</span><span>Game Jam</span></div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT 3: Indra vs Vritra -->
+            <div class="project-card tilt-card" onclick="window.location.href='indra-vs-vritra-prototype.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-7">
+                    <img src="Indra vs Vritra/Indra vs Vritra1.jpg" alt="Indra vs Vritra preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">Unity · C#</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">Narration Adventure</span>
+                    <h3 class="proj-title">Indra vs Vritra</h3>
+                    <p class="proj-desc">A narration-based adventure game inspired by the story of Indra and Vritrasur from the Shrimad Bhagwat Mahapuran.</p>
+                    <div class="proj-tags"><span>Unity</span><span>C#</span><span>Mixamo</span><span>Narration</span></div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT 4: The Shooter -->
+            <div class="project-card tilt-card" onclick="window.location.href='the-shooter.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-8">
+                    <img src="The Shooter/Screenshot 2026-04-05 103116.png" alt="The Shooter preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">Unity</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">First-Person Shooter</span>
+                    <h3 class="proj-title">The Shooter</h3>
+                    <p class="proj-desc">Advanced Unity FPS with multi-weapon combat, decal effects, and modular
+                        animations.</p>
+                    <div class="proj-tags"><span>Unity</span><span>C#</span><span>FPS</span><span>Animation</span></div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

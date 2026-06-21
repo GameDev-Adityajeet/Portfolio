@@ -1041,6 +1041,124 @@ body::after {
 /* ===========================
    PROJECTS — LEVEL SELECT
    =========================== */
+/* Category selection menu */
+.category-select-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .category-select-wrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+.category-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 3.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.15s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Corner brackets for category cards */
+.category-card::before,
+.category-card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--cyan);
+    border-style: solid;
+    z-index: 5;
+    transition: border-color 0.3s;
+}
+
+.category-card::before {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+.category-card::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 2px 2px 0;
+}
+
+.category-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 0 45px rgba(0, 240, 255, 0.15), 0 0 90px rgba(0, 240, 255, 0.05);
+}
+
+.category-card:hover::before,
+.category-card:hover::after {
+    border-color: var(--magenta);
+}
+
+.category-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.category-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--cyan);
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));
+    transition: fill 0.3s ease, filter 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.category-card:hover .category-icon svg {
+    fill: var(--magenta);
+    filter: drop-shadow(0 0 15px rgba(255, 45, 117, 0.6));
+}
+
+.category-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--text);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.category-desc {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 420px;
+    text-align: center;
+}
+
+.category-btn {
+    margin-top: 1rem;
+    pointer-events: none; /* Let click bubble to card */
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));

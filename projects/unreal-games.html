@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unreal Games | Adityajeet Yadav Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body class="has-custom-cursor">
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- THREE.JS FULL BG CANVAS -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- TOP NAV -->
+    <nav class="proj-nav">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <span class="proj-nav-label">Unreal Zone</span>
+        <span></span>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main class="page-container" style="padding: 120px 5% 80px 5%; position: relative; z-index: 10;">
+        <div class="section-header" style="margin-bottom: 3.5rem;">
+            <span class="section-prefix">◈ Stage.04-B // Level Select</span>
+            <h2 class="section-title">Unreal Games</h2>
+            <div class="title-line"></div>
+            <p style="color: var(--text-dim); font-family: var(--font-body); font-size: 0.95rem; margin-top: 1rem; max-width: 600px; line-height: 1.6;">
+                A showcase of immersive game experiences created using Unreal Engine 5. Ranging from mythologically-inspired 3D action RPGs and escape-room shooter hybrids to networked LAN multiplayer arenas.
+            </p>
+        </div>
+
+        <div class="projects-grid">
+
+            <!-- PROJECT 5: Legend of Indra vs Vritrasur -->
+            <div class="project-card tilt-card" onclick="window.location.href='indra-vs-vritrasur.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-1">
+                    <img src="Legend of Indra vs Vritrasur/Indra1.png" alt="Legend of Indra vs Vritrasur preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">Unreal Engine 5</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">Action-Adventure RPG</span>
+                    <h3 class="proj-title">Legend of Indra vs Vritrasur</h3>
+                    <p class="proj-desc">3D immersive action RPG with deity combat, enemy AI, and narrative-driven
+                        progression.</p>
+                    <div class="proj-tags"><span>UE5</span><span>Blueprints</span><span>Enemy AI</span><span>RPG</span>
+                    </div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT 6: Reality Run -->
+            <div class="project-card tilt-card" onclick="window.location.href='reality-run.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-3">
+                    <img src="../assets/projects/reality-run/ss1.png" alt="Reality Run preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">Unreal Engine 5 · GGJ 2026</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">TPS · 🏆 Best Gameplay · GGJ 2026</span>
+                    <h3 class="proj-title">Reality Run</h3>
+                    <p class="proj-desc">Third-person shooter escape-room hybrid with an alertness system, dynamic
+                        menus, and full interaction framework.</p>
+                    <div class="proj-tags"><span>UE5</span><span>Blueprints</span><span>TPS</span><span>Game Jam</span></div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT 7: Realm Rivals -->
+            <div class="project-card tilt-card" onclick="window.location.href='realm-rivals.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-4">
+                    <img src="Realm%20Rivals/Screenshot%202026-04-05%20165636.png" alt="Realm Rivals preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">UE5 · Multiplayer</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">Multiplayer Arena</span>
+                    <h3 class="proj-title">Realm Rivals</h3>
+                    <p class="proj-desc">A LAN multiplayer arena game built in Unreal Engine 5 — equip, fight, and dominate the arena.</p>
+                    <div class="proj-tags"><span>UE5</span><span>Blueprints</span><span>Multiplayer</span><span>Arena</span></div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+            <!-- PROJECT 8: The Lost Cure -->
+            <div class="project-card tilt-card" onclick="window.location.href='the-lost-cure.html'">
+                <div class="card-glow"></div>
+                <div class="project-thumb thumb-6">
+                    <img src="The%20Lost%20Cure/Lost_Cure1.jpg" alt="The Lost Cure preview"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+                    <div class="project-engine-badge">Unreal Engine 5</div>
+                    <div class="thumb-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="proj-cat">Action-Adventure</span>
+                    <h3 class="proj-title">The Lost Cure</h3>
+                    <p class="proj-desc">An Unreal Engine 5 adventure where you search for a medicinal herb in an ancient temple to save your people.</p>
+                    <div class="proj-tags"><span>UE5</span><span>Blueprints</span><span>Blender</span><span>Adventure</span></div>
+                    <span class="proj-cta">▸ Launch Level →</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>
