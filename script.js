@@ -58,277 +58,84 @@
     renderer.setClearColor(0x000000, 0);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 22);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 20);
 
     // ─── LIGHTS ─────
-    const ambientLight = new THREE.AmbientLight(0x00f0ff, 0.2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x00f0ff, 2.5, 60);
-    pointLight1.position.set(10, 15, 10);
-    scene.add(pointLight1);
+    const pointLight = new THREE.PointLight(0x00f0ff, 2, 50);
+    pointLight.position.set(5, 5, 10);
+    scene.add(pointLight);
 
-    const pointLight2 = new THREE.PointLight(0xff2d75, 2.0, 60);
-    pointLight2.position.set(-12, -8, 5);
-    scene.add(pointLight2);
-
-    const pointLight3 = new THREE.PointLight(0xa855f7, 1.5, 40);
-    pointLight3.position.set(0, -14, 8);
-    scene.add(pointLight3);
-    // ─── CANVAS LOGO TEXTURE GENERATORS ─────
-    function createUnityTexture() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 256;
-        canvas.height = 256;
-        const ctx = canvas.getContext('2d');
-        
-        ctx.clearRect(0, 0, 256, 256);
-        
-        // Setup glow styling
-        ctx.shadowColor = '#00f0ff';
-        ctx.shadowBlur = 15;
-        ctx.strokeStyle = '#00f0ff';
-        ctx.lineWidth = 10;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        
-        const cx = 128;
-        const cy = 128;
-        const s = 65; // side length
-        
-        // 3D isometric cube outline
-        // Draw inner spokes from center to three vertices
-        ctx.beginPath();
-        // Spoke to top
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx, cy - s);
-        // Spoke to bottom-left
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx - s * 0.866, cy + s * 0.5);
-        // Spoke to bottom-right
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + s * 0.866, cy + s * 0.5);
-        ctx.stroke();
-        
-        // Draw outer hexagon contour
-        ctx.beginPath();
-        ctx.moveTo(cx, cy - s); // top
-        ctx.lineTo(cx + s * 0.866, cy - s * 0.5); // top-right
-        ctx.lineTo(cx + s * 0.866, cy + s * 0.5); // bottom-right
-        ctx.lineTo(cx, cy + s); // bottom
-        ctx.lineTo(cx - s * 0.866, cy + s * 0.5); // bottom-left
-        ctx.lineTo(cx - s * 0.866, cy - s * 0.5); // top-left
-        ctx.closePath();
-        ctx.stroke();
-        
-        return new THREE.CanvasTexture(canvas);
-    }
-
-    function createUnrealTexture() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 256;
-        canvas.height = 256;
-        const ctx = canvas.getContext('2d');
-        
-        ctx.clearRect(0, 0, 256, 256);
-        
-        // Setup glow styling
-        ctx.shadowColor = '#ff2d75';
-        ctx.shadowBlur = 15;
-        ctx.strokeStyle = '#ff2d75';
-        ctx.lineWidth = 8;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        
-        const cx = 128;
-        const cy = 128;
-        
-        // Draw outer circle
-        ctx.beginPath();
-        ctx.arc(cx, cy, 90, 0, Math.PI * 2);
-        ctx.stroke();
-        
-        // Draw stylized 'U'
-        ctx.beginPath();
-        ctx.lineWidth = 14;
-        
-        // Outer curve of U
-        ctx.moveTo(90, 75);
-        ctx.lineTo(90, 130);
-        ctx.bezierCurveTo(90, 185, 166, 185, 166, 130);
-        ctx.lineTo(166, 75);
-        ctx.stroke();
-        
-        // Top outward-pointing ticks/serifs
-        ctx.beginPath();
-        ctx.lineWidth = 8;
-        ctx.moveTo(90, 75);
-        ctx.lineTo(75, 75);
-        ctx.moveTo(166, 75);
-        ctx.lineTo(181, 75);
-        ctx.stroke();
-        
-        return new THREE.CanvasTexture(canvas);
-    }
-
-    // ─── HERO 3D OBJECTS: Floating Unity/Unreal Bubbles ─────
-    const hasHero = !!document.querySelector('.hero');
-    const bubbleFieldGroup = new THREE.Group();
-    const bubbles = [];
-    
-    if (hasHero) {
-        const unityTex = createUnityTexture();
-        const unrealTex = createUnrealTexture();
-        
-        const bubbleCount = 14;
-        
-        // Geometries
-        const sphereGeo = new THREE.SphereGeometry(0.55, 20, 20);
-        const logoGeo = new THREE.PlaneGeometry(0.7, 0.7);
-        
-        for (let i = 0; i < bubbleCount; i++) {
-            const isUnity = i % 2 === 0;
-            const tex = isUnity ? unityTex : unrealTex;
-            
-            // Outer glass bubble shell
-            const shellMat = new THREE.MeshPhongMaterial({
-                color: isUnity ? 0x00f0ff : 0xff2d75,
-                emissive: isUnity ? 0x00f0ff : 0xff2d75,
-                emissiveIntensity: 0.15,
-                specular: 0xffffff,
-                shininess: 90,
-                transparent: true,
-                opacity: 0.12,
-                depthWrite: false
-            });
-            const shell = new THREE.Mesh(sphereGeo, shellMat);
-            
-            // Inner logo plane
-            const logoMat = new THREE.MeshBasicMaterial({
-                map: tex,
-                transparent: true,
-                opacity: 0.45,
-                side: THREE.DoubleSide,
-                depthWrite: false
-            });
-            const logo = new THREE.Mesh(logoGeo, logoMat);
-            
-            // Group them
-            const group = new THREE.Group();
-            group.add(shell);
-            group.add(logo);
-            
-            // Random positioning across screen dynamically based on camera frustum
-            const aspect = window.innerWidth / window.innerHeight;
-            const frustumHeight = 2 * camera.position.z * Math.tan((camera.fov * Math.PI) / 360);
-            const frustumWidth = frustumHeight * aspect;
-            
-            group.position.set(
-                (Math.random() - 0.5) * frustumWidth * 1.5,
-                (Math.random() - 0.5) * frustumHeight * 1.5,
-                (Math.random() - 0.5) * 8 - 2
-            );
-            
-            // Random scaling
-            const scale = 0.8 + Math.random() * 0.7;
-            group.scale.set(scale, scale, scale);
-            
-            // Random velocities
-            const velocity = new THREE.Vector3(
-                (Math.random() - 0.5) * 0.007,
-                (Math.random() - 0.5) * 0.007,
-                (Math.random() - 0.5) * 0.003
-            );
-            
-            // Random rotation speed for the logo plane inside
-            const rotSpeed = (Math.random() - 0.5) * 0.012;
-            const phase = Math.random() * Math.PI * 2;
-            
-            bubbleFieldGroup.add(group);
-            bubbles.push({
-                group,
-                shellMat,
-                logoMat,
-                logo,
-                velocity,
-                rotSpeed,
-                phase
-            });
-        }
-        
-        scene.add(bubbleFieldGroup);
-    }
-
-    // ─── CONSTELLATION NODE NETWORK ─────
-    const maxParticles = 90;
-    const minDistance = 5.5;
-    const particlePositions = new Float32Array(maxParticles * 3);
-    const particleData = [];
-
-    // Initialize particles inside a 3D box
-    for (let i = 0; i < maxParticles; i++) {
-        // distribute particles across the visible space
-        const x = (Math.random() - 0.5) * 45;
-        const y = (Math.random() - 0.5) * 35;
-        const z = (Math.random() - 0.5) * 16 - 3;
-        particlePositions[i * 3] = x;
-        particlePositions[i * 3 + 1] = y;
-        particlePositions[i * 3 + 2] = z;
-
-        particleData.push({
-            velocity: new THREE.Vector3(
-                (Math.random() - 0.5) * 0.02,
-                (Math.random() - 0.5) * 0.02,
-                (Math.random() - 0.5) * 0.01
-            )
-        });
-    }
-
+    // ─── STARDUST PARTICLES SETUP ─────
+    const particleCount = 140;
     const particleGeo = new THREE.BufferGeometry();
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
 
-    // Custom points material
+    const particles = [];
+
+    for (let i = 0; i < particleCount; i++) {
+        // Base positions in circular field
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 3.0 + Math.random() * 14;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        const z = (Math.random() - 0.5) * 6;
+
+        positions[i * 3] = x;
+        positions[i * 3 + 1] = y;
+        positions[i * 3 + 2] = z;
+
+        // Custom details for drift and physics
+        particles.push({
+            basePos: new THREE.Vector3(x, y, z),
+            currPos: new THREE.Vector3(x, y, z),
+            velocity: new THREE.Vector3(0, 0, 0),
+            angle: angle,
+            radius: radius,
+            speed: 0.02 + Math.random() * 0.05,
+            orbitSpeed: 0.0003 + Math.random() * 0.0006,
+            noiseOffset: Math.random() * 100,
+            size: 0.08 + Math.random() * 0.12
+        });
+
+        // Color gradient from cyan to magenta
+        const color = new THREE.Color(0x00f0ff).lerp(new THREE.Color(0xff2d75), Math.random());
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+    }
+
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
     const particleMat = new THREE.PointsMaterial({
-        color: 0x00f0ff,
-        size: 0.16,
-        transparent: true,
-        opacity: 0.6,
-        sizeAttenuation: true
-    });
-    const particlePoints = new THREE.Points(particleGeo, particleMat);
-    scene.add(particlePoints);
-
-    // Connection lines
-    const maxConnections = maxParticles * 8;
-    const linePositions = new Float32Array(maxConnections * 2 * 3);
-    const lineColors = new Float32Array(maxConnections * 2 * 3);
-
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-    lineGeo.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
-
-    const lineMat = new THREE.LineBasicMaterial({
+        size: 0.12,
         vertexColors: true,
         transparent: true,
-        opacity: 0.25,
-        blending: THREE.AdditiveBlending
+        opacity: 0.65,
+        blending: THREE.AdditiveBlending,
+        sizeAttenuation: true
     });
 
-    const lineSegments = new THREE.LineSegments(lineGeo, lineMat);
-    scene.add(lineSegments);
+    const particleSystem = new THREE.Points(particleGeo, particleMat);
+    scene.add(particleSystem);
 
-    // ─── MOUSE PARALLAX & SCROLL ─────
-    let mouseX = 0, mouseY = 0;
-    let scrollY = window.scrollY;
+    // ─── MOUSE INTERACTION ─────
+    let ndcMouse = new THREE.Vector2(-999, -999);
+    let targetMouse = new THREE.Vector2(-999, -999);
 
     document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+        // Convert screen coordinates to Normalized Device Coordinates (-1 to 1)
+        ndcMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        ndcMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
-    window.addEventListener('scroll', () => {
-        scrollY = window.scrollY;
+    document.addEventListener('mouseleave', () => {
+        ndcMouse.set(-999, -999);
     });
 
     // ─── ANIMATION LOOP ─────
@@ -336,127 +143,79 @@
 
     function animate() {
         requestAnimationFrame(animate);
+
+        const delta = clock.getDelta();
         const t = clock.getElapsedTime();
-        // 1. Update Floating Bubbles (Drift, rotate, hover, fade near center)
-        const isMobile = window.innerWidth < 992;
-        if (hasHero && bubbleFieldGroup) {
-            // Scroll parallax for the entire field of bubbles
-            const scrollFactor = isMobile ? 0.008 : 0.015;
-            bubbleFieldGroup.position.y = -scrollY * scrollFactor;
-            
-            bubbles.forEach((bubble) => {
-                // Update position via velocity
-                bubble.group.position.add(bubble.velocity);
-                
-                // Slowly rotate the inner logo plane
-                bubble.logo.rotation.y += bubble.rotSpeed;
-                bubble.logo.rotation.x += bubble.rotSpeed * 0.5;
-                
-                // Hover oscillation
-                bubble.group.position.y += Math.sin(t * 0.6 + bubble.phase) * 0.002;
-                
-                // Viewport boundary collision bouncing dynamically based on camera frustum
-                const aspect = window.innerWidth / window.innerHeight;
-                const frustumHeight = 2 * camera.position.z * Math.tan((camera.fov * Math.PI) / 360);
-                const frustumWidth = frustumHeight * aspect;
-                
-                const boundX = frustumWidth / 2 + 1.0;
-                const boundY = frustumHeight / 2 + 1.0;
-                
-                if (Math.abs(bubble.group.position.x) > boundX) {
-                    bubble.velocity.x *= -1;
-                    // Push slightly back to prevent sticky edges
-                    bubble.group.position.x = Math.sign(bubble.group.position.x) * boundX;
-                }
-                if (Math.abs(bubble.group.position.y) > boundY) {
-                    bubble.velocity.y *= -1;
-                    bubble.group.position.y = Math.sign(bubble.group.position.y) * boundY;
-                }
-                if (bubble.group.position.z < -10 || bubble.group.position.z > 6) {
-                    bubble.velocity.z *= -1;
-                }
-                
-                // Elliptical exclusion zone fading (so bubbles dissolve near main text)
-                // Center text area approx: width 9 units, height 6 units in 3D scene coordinate space
-                const rx = isMobile ? 5.5 : 8.5;
-                const ry = isMobile ? 7.5 : 5.0;
-                
-                const normX = bubble.group.position.x / rx;
-                const normY = bubble.group.position.y / ry;
-                const dist = Math.sqrt(normX * normX + normY * normY);
-                
-                let opacityFactor = 1.0;
-                if (dist < 1.0) {
-                    // Smoothly fade from 0 (at center) to 1 (at outer boundary)
-                    opacityFactor = THREE.MathUtils.smoothstep(dist, 0.15, 1.0);
-                }
-                
-                // Apply the opacity factor to the materials
-                bubble.shellMat.opacity = 0.12 * opacityFactor;
-                bubble.logoMat.opacity = 0.45 * opacityFactor;
-            });
-        }
-        // 3. Update Constellation Nodes (Particles)
-        let vertexpos = 0;
-        let colorpos = 0;
-        let numConnected = 0;
 
-        for (let i = 0; i < maxParticles; i++) {
-            // Update node positions
-            particlePositions[i * 3] += particleData[i].velocity.x;
-            particlePositions[i * 3 + 1] += particleData[i].velocity.y;
-            particlePositions[i * 3 + 2] += particleData[i].velocity.z;
+        // Smooth mouse position updates
+        targetMouse.lerp(ndcMouse, 0.08);
 
-            // Bounce boundary checks
-            if (particlePositions[i * 3] < -25 || particlePositions[i * 3] > 25) particleData[i].velocity.x *= -1;
-            if (particlePositions[i * 3 + 1] < -20 || particlePositions[i * 3 + 1] > 20) particleData[i].velocity.y *= -1;
-            if (particlePositions[i * 3 + 2] < -12 || particlePositions[i * 3 + 2] > 10) particleData[i].velocity.z *= -1;
+        // Convert mouse to 3D coords based on viewport height/width at Z=0
+        const vFOV = (camera.fov * Math.PI) / 180;
+        const visibleHeight = 2 * Math.tan(vFOV / 2) * camera.position.z;
+        const visibleWidth = visibleHeight * (window.innerWidth / window.innerHeight);
 
-            // Draw connection lines to nearby nodes
-            for (let j = i + 1; j < maxParticles; j++) {
-                const dx = particlePositions[i * 3] - particlePositions[j * 3];
-                const dy = particlePositions[i * 3 + 1] - particlePositions[j * 3 + 1];
-                const dz = particlePositions[i * 3 + 2] - particlePositions[j * 3 + 2];
-                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        const mouse3D = new THREE.Vector3(
+            targetMouse.x * visibleWidth * 0.5,
+            targetMouse.y * visibleHeight * 0.5,
+            0
+        );
 
-                if (dist < minDistance && numConnected < maxConnections) {
-                    // Line endpoint 1
-                    linePositions[vertexpos++] = particlePositions[i * 3];
-                    linePositions[vertexpos++] = particlePositions[i * 3 + 1];
-                    linePositions[vertexpos++] = particlePositions[i * 3 + 2];
+        const posArray = particleSystem.geometry.attributes.position.array;
 
-                    // Line endpoint 2
-                    linePositions[vertexpos++] = particlePositions[j * 3];
-                    linePositions[vertexpos++] = particlePositions[j * 3 + 1];
-                    linePositions[vertexpos++] = particlePositions[j * 3 + 2];
+        for (let i = 0; i < particleCount; i++) {
+            const p = particles[i];
 
-                    // Lerp color and fade by distance
-                    const alpha = 1.0 - (dist / minDistance);
-                    const color = new THREE.Color(0x00f0ff).lerp(new THREE.Color(0xff2d75), i / maxParticles);
+            // 1. Idle Orbit Drift
+            p.angle += p.orbitSpeed;
+            const driftX = Math.cos(p.angle) * p.radius;
+            const driftY = Math.sin(p.angle) * p.radius;
 
-                    lineColors[colorpos++] = color.r * alpha * 0.3;
-                    lineColors[colorpos++] = color.g * alpha * 0.3;
-                    lineColors[colorpos++] = color.b * alpha * 0.3;
+            const targetY = driftY + Math.sin(t * 0.5 + p.noiseOffset) * 0.5;
+            p.basePos.x = driftX;
+            p.basePos.y = targetY;
 
-                    lineColors[colorpos++] = color.r * alpha * 0.3;
-                    lineColors[colorpos++] = color.g * alpha * 0.3;
-                    lineColors[colorpos++] = color.b * alpha * 0.3;
+            // 2. Repel mouse interaction
+            if (targetMouse.x !== -999) {
+                const dx = p.currPos.x - mouse3D.x;
+                const dy = p.currPos.y - mouse3D.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    numConnected++;
+                const repelDist = 4.0;
+                if (dist < repelDist) {
+                    const force = (repelDist - dist) / repelDist;
+                    const dirX = dx / (dist || 1);
+                    const dirY = dy / (dist || 1);
+
+                    // Add acceleration away from mouse
+                    p.velocity.x += dirX * force * 0.45;
+                    p.velocity.y += dirY * force * 0.45;
                 }
             }
+
+            // 3. Return to base pos force
+            const restoreX = (p.basePos.x - p.currPos.x) * 0.06;
+            const restoreY = (p.basePos.y - p.currPos.y) * 0.06;
+            p.velocity.x += restoreX;
+            p.velocity.y += restoreY;
+
+            // Apply friction
+            p.velocity.x *= 0.85;
+            p.velocity.y *= 0.85;
+
+            // Update current position
+            p.currPos.x += p.velocity.x;
+            p.currPos.y += p.velocity.y;
+
+            // Write back to geometry array
+            posArray[i * 3] = p.currPos.x;
+            posArray[i * 3 + 1] = p.currPos.y;
+            posArray[i * 3 + 2] = p.currPos.z;
         }
 
-        particlePoints.geometry.attributes.position.needsUpdate = true;
-        lineSegments.geometry.setDrawRange(0, numConnected * 2);
-        lineSegments.geometry.attributes.position.needsUpdate = true;
-        lineSegments.geometry.attributes.color.needsUpdate = true;
+        particleSystem.geometry.attributes.position.needsUpdate = true;
 
-        // 4. Parallax Camera motion
-        camera.position.x += (mouseX * 1.8 - camera.position.x) * 0.03;
-        camera.position.y += (mouseY * 1.0 - camera.position.y) * 0.03;
-        camera.lookAt(scene.position);
-
+        // Render frame
         renderer.render(scene, camera);
     }
     animate();
@@ -707,13 +466,6 @@ if (overlay) {
             </div>
         `;
     }
-    
-    sidebar.innerHTML = `
-        <div class="card-glow"></div>
-        <div class="sidebar-inner">
-            ${sidebarHTML}
-        </div>
-    `;
     
     grid.appendChild(sidebar);
 })();
