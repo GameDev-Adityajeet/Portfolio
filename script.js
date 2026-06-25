@@ -467,5 +467,6 @@ if (overlay) {
         `;
     }
     
+    sidebar.innerHTML = sidebarHTML;
     grid.appendChild(sidebar);
 })();
